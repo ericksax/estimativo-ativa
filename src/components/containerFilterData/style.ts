@@ -2,21 +2,21 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: fixed;
-  top: 170px;
+  top: 17rem;
   display: flex;
   background-color: white;
-  max-height: 500px;
+  max-height: 50rem;
   border: 1px solid black;
   overflow-y: auto;
   width: 100%;
-  max-width: 1200px;
+  max-width: 94rem;
  
   ul {
-    padding: 0.5rem;
     width: 100%;
   }
 
   li {
+    font-size: 1.4rem;
     cursor: pointer;
     padding: 0.5rem;
     width: 100%;

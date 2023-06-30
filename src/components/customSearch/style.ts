@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  overflow-x: auto;
   main {
-    padding-bottom: 12rem;
+    padding-bottom: 8rem;
   }
 `
 export const EmptyList = styled.div`
@@ -14,7 +13,7 @@ export const EmptyList = styled.div`
   background-color: var(--color-grey-200);
   color: var(--color-grey-500);
   width: 100%;
-  height: 400px;
+  height: 24rem;
   gap: 4rem;
 
   svg {
@@ -29,12 +28,13 @@ export const StyledFooter = styled.footer`
   width: 100%;
   background-color: white;
   border-top: 1px solid var(--color-grey-300);
-
+  
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding: 0 2rem;
   }
 
   button {

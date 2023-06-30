@@ -2,7 +2,7 @@ import { CustomFaTrash, StyledTr } from './style'
 
 export function TableRow({ deleteProduct, item, index }: TableRowProps) {
   const numItem = index + 1
-  const unitaryPrice = item['PF Sem Impostos'] / item.quantity
+  const unitaryPrice = (item['PF Sem Impostos'] / item.quantity).toFixed(2)
   return (
     <StyledTr>
       <td>{numItem}</td>

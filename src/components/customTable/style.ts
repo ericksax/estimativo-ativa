@@ -5,11 +5,11 @@ export const StyledTable = styled.table`
   font-size: 14px;
   
   tr {
-    height: 60px;
+    height: 6rem;
   }
 
   thead tr {
-    height: 40px;
+    height: 4rem;
   }
 
   th {

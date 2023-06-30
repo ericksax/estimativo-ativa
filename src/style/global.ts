@@ -17,21 +17,22 @@ export const GlobalStyles = createGlobalStyle`
 
     --color-grey-50:  #fafafa;
     --color-warning: #e61919;
+    
+    font-size: 62.5%;
   }
 
   body {
     font-family: 'Poppins', sans-serif;
     font-size: 1.6rem;
     background-color: var(--color-grey-100);
-    height: 100vh;
-    width: 100%;
     --webkit-font-smoothing: antialiased;
   }
 
   .wrapper {
     margin: 0 auto;
     width: 100%;
-    max-width: 120rem;
+    max-width: 98rem;
+    padding: 2rem;
   }
 `
 

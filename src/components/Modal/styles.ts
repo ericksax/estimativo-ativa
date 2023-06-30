@@ -14,11 +14,11 @@ export const StyledModal = styled.div`
 
   > div {
     background-color: white;
-    padding: 4rem;
-    width: 64rem;
+    padding: 2rem;
+    width: 42rem;
 
     h2 {
-      margin-bottom: 4rem;
+      margin-bottom: 1rem;
     }
 
     form {
@@ -29,11 +29,11 @@ export const StyledModal = styled.div`
 
       button {
         background-color: var(--color-brand-2);
-        padding: 2rem;
+        padding: 1rem;
         width: 100%;
         color: white;
-        font-size: 1.6rem;
-        margin-top: 2rem;
+        font-size: 1.4rem;
+        margin-top: 1rem;
         border-radius: 0.5rem;
 
         &:disabled {
@@ -47,7 +47,8 @@ export const StyledModal = styled.div`
     display: flex;
     align-items: center;
     height: 64px;
-    gap: 2rem;
+    gap: 1rem;
+    font-size: 1.2rem;
 
     svg {
       fill: var(--color-brand-3);

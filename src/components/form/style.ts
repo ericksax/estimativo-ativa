@@ -21,7 +21,7 @@ export const FormContainer = styled.div`
     input {
       border: 1px solid var(--color-grey-300);
       font-size: 1.6rem;
-      padding: 1.6rem;
+      padding: 1rem;
     }
 
     input[type='number'] {

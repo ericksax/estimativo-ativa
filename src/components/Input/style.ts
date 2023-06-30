@@ -8,17 +8,18 @@ export const StyledInput = styled.div`
   width: 100%;
 
   & + div {
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 
   label {
     color: var(--color-grey-500);
+    font-size: 1.2rem;
   }
  
   input {
     background-color: var(--color-grey-200) ;
-    padding: 2rem;
-    font-size: 1.6rem;
+    padding: 1rem;
+    font-size: 1.4rem;
     border: 1px solid var(--color-grey-400);
   }
 `
