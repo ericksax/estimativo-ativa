@@ -19,7 +19,7 @@ export const StyledInput = styled.div`
   input {
     background-color: var(--color-grey-200) ;
     padding: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     border: 1px solid var(--color-grey-400);
   }
 `

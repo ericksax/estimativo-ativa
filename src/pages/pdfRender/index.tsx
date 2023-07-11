@@ -1,18 +1,18 @@
-import { Page, Text, View, Document, PDFViewer,  } from "@react-pdf/renderer";
+import { Page, Text, View, Document, PDFViewer } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 import { formatToCurrency } from "../../utils/utils";
 import { styles } from "./styles";
 
 const initialState = {
-  name: '',
-  contact: '',
-  cnpj: '',
-  adress: ''
-}
+  name: "",
+  contact: "",
+  cnpj: "",
+  adress: "",
+};
 
 export const PDFRender = () => {
   const [list, setList] = useState([] as any[]);
-  const [contactInfo, setContactInfo] = useState(initialState) 
+  const [contactInfo, setContactInfo] = useState(initialState);
 
   const date = new Date().toLocaleDateString("pt-br");
   const total = formatToCurrency(
@@ -21,17 +21,20 @@ export const PDFRender = () => {
   const counter = new Date().getTime().toString().substring(7);
 
   useEffect(() => {
-    const hasList = Object.keys(JSON.parse(localStorage.getItem("@AtivaHospLogList")!)).length > 0
+    const hasList =
+      Object.keys(JSON.parse(localStorage.getItem("@AtivaHospLogList")!))
+        .length > 0;
 
-    if(hasList) {
-      const productList = JSON.parse(localStorage.getItem("@AtivaHospLogList")!);
+    if (hasList) {
+      const productList = JSON.parse(
+        localStorage.getItem("@AtivaHospLogList")!
+      );
       setList([...productList]);
-
     }
 
-    if(localStorage.getItem('@EstimativOrc')) {
-      const infos = JSON.parse(localStorage.getItem('@EstimativOrc')!) ;
-      setContactInfo(infos)
+    if (localStorage.getItem("@EstimativOrc")) {
+      const infos = JSON.parse(localStorage.getItem("@EstimativOrc")!);
+      setContactInfo(infos);
     }
   }, []);
 
@@ -39,6 +42,9 @@ export const PDFRender = () => {
     <PDFViewer style={styles.document}>
       <Document>
         <Page size="A4" style={styles.page} wrap>
+          <View>
+            <Text style={styles.title}>Orçamento Estimativo</Text>
+          </View>
           <View style={styles.section}>
             <div style={styles.topHeader}>
               <Text style={styles.bold}>ATIVA MEDICO CIRURGICA LTDA</Text>
@@ -90,7 +96,9 @@ export const PDFRender = () => {
                       {item.LABORATÓRIO.substring(0, 20) + "..."}
                     </Text>
                     <Text style={styles.row4}>{item.quantity}</Text>
-                    <Text style={styles.row5}>{(item["PF Sem Impostos"]).toFixed(2)}</Text>
+                    <Text style={styles.row5}>
+                      {item["PF Sem Impostos"].toFixed(2)}
+                    </Text>
                   </View>
                 );
               })}
@@ -99,16 +107,16 @@ export const PDFRender = () => {
           <View>
             <Text style={styles.total}>Total: {total}</Text>
           </View>
-            <View fixed style={styles.footer}>
-              <Text fixed>
-                _______________________________________________________________________________________________________________________________
-              </Text>
-              <Text fixed>Orçamento Estimativo válido por 10 dias</Text>
-              <Text fixed>
-                ATIVA MÉDICO CIRÚRGICA - AV VEREADOR RAYMUNDO HARGREAVES, 98 -
-                MILHO BRANCO JUIZ DE FORA - MG - 36083-770
-              </Text>
-            </View>
+          <View fixed style={styles.footer}>
+            <Text fixed>
+              _______________________________________________________________________________________________________________________________
+            </Text>
+            <Text fixed>Orçamento Estimativo válido por 10 dias</Text>
+            <Text fixed>
+              ATIVA MÉDICO CIRÚRGICA - AV VEREADOR RAYMUNDO HARGREAVES, 98 -
+              MILHO BRANCO JUIZ DE FORA - MG - 36083-770
+            </Text>
+          </View>
         </Page>
       </Document>
     </PDFViewer>

@@ -12,7 +12,7 @@ export function TableRow({ deleteProduct, item, index }: TableRowProps) {
       <td>{unitaryPrice}</td>
       <td>{item.quantity}</td>
       <td>{item["PF Sem Impostos"].toFixed(2)}</td>
-      <td><CustomFaTrash onClick={() => deleteProduct(item['CÓDIGO GGREM'])} /></td>
+      <td><CustomFaTrash size={14} onClick={() => deleteProduct(item['CÓDIGO GGREM'])} /></td>
     </StyledTr>
   )
 }

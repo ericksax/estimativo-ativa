@@ -26,6 +26,11 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     background-color: var(--color-grey-100);
     --webkit-font-smoothing: antialiased;
+    
+    .no-scroll {
+      overflow: hidden;
+      position: fixed;
+    }
   }
 
   .wrapper {
@@ -33,7 +38,9 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     max-width: 98rem;
     padding: 2rem;
+    overflow: auto;
   }
+
 `
 
 

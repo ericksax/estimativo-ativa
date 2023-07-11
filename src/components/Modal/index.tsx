@@ -15,7 +15,7 @@ interface FormDataProps {
 }
 
 export function Modal() {
-  const { isOpen, setIsOpen } = useModal()
+  const { isOpen, setIsOpen } = useModal();
   const {
     register,
     handleSubmit,
@@ -26,54 +26,80 @@ export function Modal() {
   });
 
   useEffect(() => {
-    const hasLocal = localStorage.getItem('@EstimativOrc')
-    console.log(hasLocal)
+    const hasItem =
+      JSON.parse(localStorage.getItem("@AtivaHospLogList")!).length > 0;
+
+    const hasLocal = localStorage.getItem("@EstimativOrc") || hasItem;
+
     if (hasLocal) {
       setIsOpen(false);
+      document.body.classList.add("no-scroll");
     } else {
       setIsOpen(true);
     }
-  },[]);
+
+    // return () => document.body.classList.remove(".no-scroll");
+  }, []);
 
   function submit(formData: FormDataProps) {
     localStorage.setItem("@EstimativOrc", JSON.stringify(formData));
-    setIsOpen(false)
+    setIsOpen(false);
     reset();
   }
 
   return (
-<>
-    {isOpen ? <StyledModal>
-      <div>
-        <h2>Bem vindo ao orçamento estimativo da Ativa Hospitalar.</h2>
-        <div className="info">
-          <FaInfoCircle size={48} />
-          <p>
-            É importante preencher corretamente os dados da empresa, pois serão
-            impressos no documento de orçamento ao final.
-          </p>
-        </div>
-        <form onSubmit={handleSubmit(submit)}>
-          <Input label={"Nome"} type="text" {...register("name")} />
-          {errors?.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-          <Input label={"Endereço"} type="text" {...register("adress")} />
-          {errors?.adress && (
-            <ErrorMessage>{errors.adress.message}</ErrorMessage>
-          )}
-          <Input label={"CNPJ"} type="text" {...register("cnpj")} />
-          {errors?.cnpj && <ErrorMessage>{errors.cnpj.message}</ErrorMessage>}
-          <Input label={"Contato"} type="text" {...register("contact")} />
-          {errors?.contact && (
-            <ErrorMessage>{errors.contact.message}</ErrorMessage>
-          )}
-          <button disabled={!isValid} type="submit">
-            Começar orçamento
-          </button>
-        </form>
-      </div>
-    </StyledModal> : null}
-
-    
+    <>
+      {isOpen ? (
+        <StyledModal>
+          <div>
+            <h2>Bem vindo ao orçamento estimativo da Ativa Hospitalar.</h2>
+            <div className="info">
+              <FaInfoCircle size={48} />
+              <p>
+                É importante preencher corretamente os dados da empresa, pois
+                serão impressos no documento de orçamento ao final.
+              </p>
+            </div>
+            <form onSubmit={handleSubmit(submit)}>
+              <Input
+                label={"Nome: (min 3 caracteres)"}
+                type="text"
+                {...register("name")}
+              />
+              {errors?.name && (
+                <ErrorMessage>{errors.name.message}</ErrorMessage>
+              )}
+              <Input
+                label={"Endereço: (Endereço completo. min 20 caractertes)"}
+                type="text"
+                {...register("adress")}
+              />
+              {errors?.adress && (
+                <ErrorMessage>{errors.adress.message}</ErrorMessage>
+              )}
+              <Input
+                label={"CNPJ: 00.000.000/0000-23"}
+                type="text"
+                {...register("cnpj")}
+              />
+              {errors?.cnpj && (
+                <ErrorMessage>{errors.cnpj.message}</ErrorMessage>
+              )}
+              <Input
+                label={"Telefone: (000)00000-0000"}
+                type="text"
+                {...register("contact")}
+              />
+              {errors?.contact && (
+                <ErrorMessage>{errors.contact.message}</ErrorMessage>
+              )}
+              <button disabled={!isValid} type="submit">
+                Começar orçamento
+              </button>
+            </form>
+          </div>
+        </StyledModal>
+      ) : null}
     </>
   );
 }

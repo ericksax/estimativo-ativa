@@ -1,24 +1,26 @@
 import styled from "styled-components";
 
+
 export const StyledModal = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   > div {
     background-color: white;
     padding: 2rem;
     width: 42rem;
-
+   
     h2 {
       margin-bottom: 1rem;
+      color: var(--color-grey-800)
     }
 
     form {
@@ -43,6 +45,7 @@ export const StyledModal = styled.div`
       }
     }
   }
+
   .info {
     display: flex;
     align-items: center;
@@ -57,6 +60,7 @@ export const StyledModal = styled.div`
     p {
       color: var(--color-grey-500);
     }
+
     margin-bottom: 1rem;
   }
 `;

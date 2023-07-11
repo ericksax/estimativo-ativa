@@ -1,6 +1,12 @@
 import { StyleSheet } from "@react-pdf/renderer";
 
 export const styles = StyleSheet.create({
+  title: {
+    fontWeight: 'bold',
+    fontSize: '18px',
+    textAlign: 'center',
+  },
+
   page: {
     flexDirection: 'column',
     backgroundColor: '#E4E4E4',

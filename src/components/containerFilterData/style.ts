@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   background-color: white;
   max-height: 50rem;
-  border: 1px solid black;
+  border: 1px solid var(--color-grey-400);
   overflow-y: auto;
   width: 100%;
   max-width: 94rem;

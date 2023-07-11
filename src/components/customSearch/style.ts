@@ -13,6 +13,7 @@ export const EmptyList = styled.div`
   background-color: var(--color-grey-200);
   color: var(--color-grey-500);
   width: 100%;
+  min-width: 52.4rem;
   height: 24rem;
   gap: 4rem;
 
@@ -21,31 +22,3 @@ export const EmptyList = styled.div`
   }
 `
 
-export const StyledFooter = styled.footer`
-  position: fixed;
-  bottom: 0;
-  height: 8rem;
-  width: 100%;
-  background-color: white;
-  border-top: 1px solid var(--color-grey-300);
-  
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding: 0 2rem;
-  }
-
-  button {
-    background-color: var(--color-brand-3);
-    color: white;
-    border-radius: 0.8rem;
-    padding: 0.8rem 1.6rem;
-    margin-right: 1rem;
-  }
-
-  strong span {
-    color: var(--color-grey-600)
-  }
-`

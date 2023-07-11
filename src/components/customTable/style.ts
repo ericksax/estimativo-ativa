@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledTable = styled.table`
   width: 100%;
-  font-size: 14px;
+  font-size: 11px;
   
   tr {
     height: 6rem;
