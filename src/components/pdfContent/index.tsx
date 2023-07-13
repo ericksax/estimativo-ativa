@@ -1,40 +1,10 @@
-import { Page, Text, View, Document, PDFViewer } from "@react-pdf/renderer";
-import { useEffect, useState } from "react";
-import { styles } from "./styles";
-import { usePdf } from "../../hooks/usePdf";
-import { ContactProps } from "../../providers/pdfContext";
-import { formatToCurrency } from "../../utils/utils";
+import { pdfjs } from 'react-pdf';
+import { Page, Text, View, Document } from "@react-pdf/renderer";
+import { styles } from './styles';
 
-export const PDFRender = () => {
-  const [contactInfo, setContactInfo] = useState({} as ContactProps);
-  const [list, setList] = useState([] as any[]);
-  const {counter, date} = usePdf()
-
-  const total = formatToCurrency(
-    list.reduce((acc, act) => acc + act["PF Sem Impostos"], 0)
-  );
-
-useEffect(() => {
-  const hasList =
-    Object.keys(JSON.parse(localStorage.getItem("@AtivaHospLogList")!))
-      .length > 0;
-
-  if (hasList) {
-    const productList = JSON.parse(
-      localStorage.getItem("@AtivaHospLogList")!
-    );
-    setList([...productList]);
-  }
-
-  if (localStorage.getItem("@EstimativOrc")) {
-    const infos = JSON.parse(localStorage.getItem("@EstimativOrc")!);
-    setContactInfo(infos);
-  }
-
-}, []);
+export function PdfContent() {
   return (
-    <PDFViewer style={styles.document}>
-      <Document>
+    <Document>
         <Page size="A4" style={styles.page} wrap>
           <View>
             <Text style={styles.title}>Orçamento Estimativo</Text>
@@ -113,6 +83,6 @@ useEffect(() => {
           </View>
         </Page>
       </Document>
-    </PDFViewer>
-  );
-};
+  )
+}
+

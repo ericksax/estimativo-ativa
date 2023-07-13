@@ -3,7 +3,6 @@ import { GlobalStyles } from "../../style/global";
 import { GlobalReset } from "../../style/reset";
 import { CustomSearch } from "../../components/customSearch";
 import { useEffect, useState } from "react"
-import { Modal } from "../../components/Modal";
 
 export function Home() {
   const [ data, setData ] = useState([] as DataType[])
@@ -22,7 +21,6 @@ export function Home() {
       <GlobalReset />
       <GlobalStyles />
       <Header />
-      <Modal />
       <CustomSearch data={data} />
     </>
   )

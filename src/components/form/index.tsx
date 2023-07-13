@@ -1,6 +1,7 @@
 import { FormContainer } from "./style";
 
-export function Form({ handleSubmit, searchTerm, setSearchTerm, setInputQuantity, inputQuantity }: FormProps) {
+export function Form({handleSubmit, searchTerm, setSearchTerm, setInputQuantity, inputQuantity }: FormProps) {
+  
   return (
     <FormContainer>
       <form onSubmit={handleSubmit}>

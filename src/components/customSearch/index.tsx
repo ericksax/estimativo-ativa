@@ -1,53 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { EmptyList, Container } from "./style.js";
 import { FaFolderOpen } from "react-icons/fa";
 import { CustomTable } from "../customTable/index.js";
 import { ContainerFilterData } from "../containerFilterData/index.js";
 import { Form } from "../form/index.js";
-import { useModal } from "../../providers/modalContext/index.js";
 import { Footer } from "../Footer/index.js";
-import { CustomModal } from "../CustomModal/index.js";
-import { Button } from "../../style/buttons/index.js";
-import { CustomModalContainer } from "../CustomModal/style.js";
+import { CustomModal } from "../customModal/index.js";
+import { useModal } from "../../hooks/useModal/index.js";
 
 export function CustomSearch({ data }: DataTypeProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [tableList, setTableList] = useState([] as ProductProps[]);
   const [product, setProduct] = useState({} as DataType);
   const [inputQuantity, setInputQuantity] = useState(1);
-  const [areYouSure, setAreYouSure] = useState(false);
-  const { setIsOpen } = useModal();
+  const { setAreYouSure } = useModal();
   const total = tableList.reduce((acc, act) => acc + act["PF Sem Impostos"], 0);
-
-  const modalRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const handleOutClick: any = (event: any) => {
-      if (!modalRef.current?.contains(event.target)) {
-        setAreYouSure(false);
-      }
-    };
-
-    window.addEventListener("mousedown", handleOutClick);
-
-    return () => {
-      window.removeEventListener("mousedown", handleOutClick);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleKeydown = (e: { key: string }) => {
-      if (e.key === "Escape") {
-        buttonRef.current?.click();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeydown);
-    return () => {
-      window.removeEventListener("keydown", handleKeydown);
-    };
-  });
 
   useEffect(() => {
     const dataFromStorage = localStorage.getItem("@AtivaHospLogList");
@@ -73,13 +40,6 @@ export function CustomSearch({ data }: DataTypeProps) {
       return groupedName.includes(term);
     }
   });
-
-  function cleanSavedList() {
-    setIsOpen(true);
-    setAreYouSure(false);
-    setTableList([]);
-    localStorage.removeItem("@EstimativOrc");
-  }
 
   function addItemToTable(item: DataType) {
     const formattedTerm =
@@ -146,35 +106,7 @@ export function CustomSearch({ data }: DataTypeProps) {
         ) : null}
       </main>
       <Footer setAreYouSure={setAreYouSure} total={total} />
-      <CustomModal areYouSure={areYouSure}>
-        <CustomModalContainer ref={modalRef}>
-          <span>
-            <button onClick={() => setAreYouSure(false)}>X</button>
-          </span>
-
-          <header>
-            <p>
-              Ao confirmar você apagará a lista de itens e todos os dados
-              informados anteriormente.
-            </p>
-            <strong>Você deseja continuar?</strong>
-          </header>
-
-          <div className="flex-between">
-            <Button variant="warning" width="122px" onClick={cleanSavedList}>
-              Sim
-            </Button>
-            <Button
-              variant="primary"
-              width="122px"
-              ref={buttonRef}
-              onClick={() => setAreYouSure(false)}
-            >
-              não
-            </Button>
-          </div>
-        </CustomModalContainer>
-      </CustomModal>
+      <CustomModal setTableList={setTableList}/>
     </Container>
   );
 }

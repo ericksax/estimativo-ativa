@@ -1,13 +1,24 @@
-import { ReactNode } from "react";
-import { StyledModal } from "../Modal/styles";
+import { ModalInfo } from "../modalInfo";
+import { ModalDestroy } from "../modalDestroy";
+import { SetStateAction } from "react";
+import { ModalSendByMail } from "../modalByMail";
+import { useModal } from "../../hooks/useModal";
 
 interface CustomModalProps {
-  children: ReactNode;
-  areYouSure: boolean;
+  setTableList: React.Dispatch<SetStateAction<ProductProps[]>>;
 }
 
-export const CustomModal = ({ children, areYouSure}: CustomModalProps) => {
-
-  return <> {areYouSure ? <StyledModal>{children}</StyledModal> : null} </>;
+export const CustomModal = ({ setTableList }: CustomModalProps) => {
+  const { areYouSure, isOpen, sendMail } = useModal();
+  return (
+    <>
+      {areYouSure ? (
+        <ModalDestroy setTableList={setTableList} />
+      ) : isOpen ? (
+        <ModalInfo />
+      ) : sendMail ? (
+        <ModalSendByMail />
+      ) : null}
+    </>
+  );
 };
-

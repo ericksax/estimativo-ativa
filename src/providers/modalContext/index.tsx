@@ -1,11 +1,15 @@
-import { SetStateAction, createContext, useContext, useState } from "react";
+import { SetStateAction, createContext, useState } from "react";
 
 interface ModalContextProps {
   setIsOpen: React.Dispatch<SetStateAction<boolean>>
-  isOpen: boolean
+  setAreYouSure: React.Dispatch<SetStateAction<boolean>>
+  setSendMail:  React.Dispatch<SetStateAction<boolean>>
+  areYouSure: boolean
+  isOpen: boolean,
+  sendMail: boolean,
 }
 
-const ModalContext = createContext({} as ModalContextProps);
+export const ModalContext = createContext({} as ModalContextProps);
 
 interface ModalProviderProps {
   children: React.ReactNode;
@@ -13,16 +17,15 @@ interface ModalProviderProps {
 
 export function ModalProvider({ children }: ModalProviderProps) {
   const [isOpen, setIsOpen] = useState(true)
-  return <ModalContext.Provider value={{
-    isOpen,
-    setIsOpen
-  }}>{children}</ModalContext.Provider>;
-}
+  const [areYouSure, setAreYouSure] = useState(false);
+  const [sendMail, setSendMail] = useState(false);
 
-export function useModal() {
-  const { isOpen, setIsOpen } = useContext(ModalContext)
-  return {
+  return <ModalContext.Provider value={{
+    areYouSure,
+    setAreYouSure,
     isOpen,
-    setIsOpen
-  }
+    setIsOpen,
+    sendMail,
+    setSendMail
+  }}>{children}</ModalContext.Provider>;
 }
