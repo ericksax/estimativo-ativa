@@ -5,7 +5,7 @@ import { ModalSendByMail } from "../modalByMail";
 import { useModal } from "../../hooks/useModal";
 
 interface CustomModalProps {
-  setTableList: React.Dispatch<SetStateAction<ProductProps[]>>;
+  setTableList: React.Dispatch<SetStateAction<AtivaProductProps[]>>;
 }
 
 export const CustomModal = ({ setTableList }: CustomModalProps) => {
