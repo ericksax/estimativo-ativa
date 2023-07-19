@@ -1,5 +1,5 @@
 interface TableRowProps {
-  deleteProduct: (id: string) => void,
-  item: ProductProps
+  deleteProduct: (id: number) => void,
+  item: AtivaProductProps
   index: number
 }

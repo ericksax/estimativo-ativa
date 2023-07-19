@@ -5,7 +5,7 @@ import { CustomModalContainer, StyledModal } from "./style";
 import { useModal } from "../../hooks/useModal";
 
 interface ModalDestroyProps {
-  setTableList: React.Dispatch<SetStateAction<ProductProps[]>>
+  setTableList: React.Dispatch<SetStateAction<AtivaProductProps[]>>
 }
 
 export const ModalDestroy = ({setTableList}: ModalDestroyProps ) => {

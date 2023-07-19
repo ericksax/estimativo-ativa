@@ -5,7 +5,7 @@ export const Container = styled.div`
   top: 17rem;
   display: flex;
   background-color: white;
-  max-height: 50rem;
+  max-height: 40rem;
   border: 1px solid var(--color-grey-400);
   overflow-y: auto;
   width: 100%;

@@ -7,14 +7,18 @@ import { Form } from "../form/index.js";
 import { Footer } from "../Footer/index.js";
 import { CustomModal } from "../customModal/index.js";
 import { useModal } from "../../hooks/useModal/index.js";
+import { BounceLoader } from 'react-spinners'
+interface CustomSearchProps extends DataTypeProps {
+  isLoading: boolean
+}
 
-export function CustomSearch({ data }: DataTypeProps) {
+export function CustomSearch({ data, isLoading }: CustomSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [tableList, setTableList] = useState([] as ProductProps[]);
-  const [product, setProduct] = useState({} as DataType);
+  const [tableList, setTableList] = useState([] as AtivaProductProps[]);
+  const [product, setProduct] = useState({} as AtivaProductProps);
   const [inputQuantity, setInputQuantity] = useState(1);
   const { setAreYouSure } = useModal();
-  const total = tableList.reduce((acc, act) => acc + act["PF Sem Impostos"], 0);
+  const total = tableList.reduce((acc, act) => acc + Number(act.valor), 0);
 
   useEffect(() => {
     const dataFromStorage = localStorage.getItem("@AtivaHospLogList");
@@ -32,8 +36,8 @@ export function CustomSearch({ data }: DataTypeProps) {
     localStorage.setItem("@AtivaHospLogList", JSON.stringify(tableList));
   }, [tableList]);
 
-  const filteredData = data.filter((item: DataType) => {
-    const groupedName = (item.PRODUTO + item.LABORATÓRIO).toLowerCase();
+  const filteredData = data.filter((item: AtivaProductProps) => {
+    const groupedName = (item.descricao_produto + item.fabricante).toLowerCase();
     const term = searchTerm.toLowerCase();
 
     if (term.length >= 3) {
@@ -41,9 +45,9 @@ export function CustomSearch({ data }: DataTypeProps) {
     }
   });
 
-  function addItemToTable(item: DataType) {
+  function addItemToTable(item: AtivaProductProps) {
     const formattedTerm =
-      item.PRODUTO + " - " + item.APRESENTAÇÃO + " - " + item.LABORATÓRIO;
+      item.descricao_produto + " - " + item.fabricante;
     setSearchTerm(formattedTerm);
     setProduct(item);
   }
@@ -54,16 +58,16 @@ export function CustomSearch({ data }: DataTypeProps) {
     setInputQuantity(1);
 
     const hasOnTableList = tableList.find(
-      (item) => item["EAN 1"] == product["EAN 1"]
+      (item) => item.id_produto == product.id_produto
     );
     
     const formattedPrice =
-      parseFloat(product["PF Sem Impostos"].split(",").join("")) / 100;
+      parseFloat(product.valor.split(",").join("")) / 100;
 
     if (hasOnTableList) {
       const price = formattedPrice;
       hasOnTableList.quantity = hasOnTableList.quantity + inputQuantity;
-      hasOnTableList["PF Sem Impostos"] = hasOnTableList.quantity * price;
+      hasOnTableList.valor = (hasOnTableList.quantity * price).toString();
 
       return setTableList((state) => [...state]);
     }
@@ -80,6 +84,32 @@ export function CustomSearch({ data }: DataTypeProps) {
     }
   }
 
+const override: React.CSSProperties = {
+  display: "block",
+  margin: "8rem auto",
+}
+
+  if(isLoading) {
+    return (
+      <div style={{
+        margin: "0 auto",
+        width: "500px",
+        textAlign: "center",
+        color: "var(--color-grey-800)"
+      }}>
+      <BounceLoader 
+        cssOverride={override}
+        color="#3e96a9"
+        loading={isLoading}
+        size={150}
+        aria-label="Loading-Spinner"
+      />
+      <p>Estamos preparando tudo para você, aguarde...</p>
+      </div>
+      
+    )
+  }
+
   return (
     <Container>
       <main className="wrapper">
@@ -90,7 +120,7 @@ export function CustomSearch({ data }: DataTypeProps) {
           setInputQuantity={setInputQuantity}
           inputQuantity={inputQuantity}
         />
-        {filteredData.length > 0 && searchTerm != product.PRODUTO && (
+        {filteredData.length > 0 && searchTerm != product.descricao_produto && (
           <ContainerFilterData
             filteredData={filteredData}
             searchTerm={searchTerm}

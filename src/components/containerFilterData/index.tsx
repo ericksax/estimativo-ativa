@@ -4,10 +4,10 @@ export function ContainerFilterData({filteredData, searchTerm, addItemToTable}: 
   return (
     <Container>
       <ul>
-        {filteredData.map((item: any) => (
+        {filteredData.map((item: AtivaProductProps) => (
           searchTerm &&
-          searchTerm != item.PRODUTO &&
-          <li key={item['CÓDIGO GGREM']} onClick={() => addItemToTable(item)}>{item.PRODUTO + '-' + item.APRESENTAÇÃO + '-'+ item.LABORATÓRIO }</li>
+          searchTerm != item.descricao_produto &&
+          <li key={item.id_produto} onClick={() => addItemToTable(item)}>{item.descricao_produto + '-' + item.embalagem + '-'+ item.fabricante }</li>
         ))}
       </ul>
   </Container>

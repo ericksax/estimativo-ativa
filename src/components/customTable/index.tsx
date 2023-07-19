@@ -6,15 +6,15 @@ import { TableRow } from "../tableRow";
 export function CustomTable({ tableList, setTableList }: TableListProps) {
 
 
-  function deleteProduct(id: string) {
-    const filteredTableList = tableList.filter(item => item["CÓDIGO GGREM"] != id)
+  function deleteProduct(id: number) {
+    const filteredTableList = tableList.filter(item => item.id_produto != id)
     setTableList([...filteredTableList])
   }
 
-  const formatedTableList = tableList.map((item: ProductProps) => {
+  const formatedTableList = tableList.map((item: AtivaProductProps) => {
     item = {
       ...item,
-      'PF Sem Impostos': Number(formatToCurrency(Number(item["PF Sem Impostos"].toFixed(2))))
+      valor: String(formatToCurrency(Number(Number(item.valor).toFixed(2))))
     }
   })
 
@@ -35,7 +35,7 @@ export function CustomTable({ tableList, setTableList }: TableListProps) {
 
       <tbody>
         {formatedTableList.length > 0 && tableList.map((item, index: number) => (
-          <TableRow key={item['CÓDIGO GGREM']} 
+          <TableRow key={item.id_produto} 
           deleteProduct={deleteProduct} 
           item={item}
           index={index} 

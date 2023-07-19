@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ModalProvider } from "./providers/modalContext";
 
 function App() {
+
   return (
     <BrowserRouter>
       <ModalProvider>

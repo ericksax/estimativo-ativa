@@ -1,5 +1,5 @@
 interface ContainerFilterDataProps {
-  filteredData: DataType[],
+  filteredData: AtivaProductProps[],
   searchTerm: string,
-  addItemToTable: (item: DataType) => void
+  addItemToTable: (item: AtivaProductProps) => void
 }

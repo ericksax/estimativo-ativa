@@ -7,11 +7,11 @@ import { formatToCurrency } from "../../utils/utils";
 
 export const PDFRender = () => {
   const [contactInfo, setContactInfo] = useState({} as ContactProps);
-  const [list, setList] = useState([] as any[]);
+  const [list, setList] = useState([] as AtivaProductProps[]);
   const {counter, date} = usePdf()
 
   const total = formatToCurrency(
-    list.reduce((acc, act) => acc + act["PF Sem Impostos"], 0)
+    list.reduce((acc, act) => acc + Number(act.valor), 0)
   );
 
 useEffect(() => {
@@ -81,17 +81,17 @@ useEffect(() => {
                 return (
                   <View key={i} style={styles.row} wrap={false}>
                     <Text style={styles.row0}>{numItem}</Text>
-                    <Text style={styles.row1}>{item.PRODUTO}</Text>
+                    <Text style={styles.row1}>{item.descricao_produto}</Text>
                     <Text style={styles.row2}>
                       {" "}
-                      {item.APRESENTAÇÃO.substring(0, 30) + "..."}
+                      {item.embalagem.substring(0, 30) + "..."}
                     </Text>
                     <Text style={styles.row3}>
-                      {item.LABORATÓRIO.substring(0, 20) + "..."}
+                      {item.fabricante.substring(0, 20) + "..."}
                     </Text>
                     <Text style={styles.row4}>{item.quantity}</Text>
                     <Text style={styles.row5}>
-                      {item["PF Sem Impostos"].toFixed(2)}
+                      {Number(item.valor).toFixed(2)}
                     </Text>
                   </View>
                 );
