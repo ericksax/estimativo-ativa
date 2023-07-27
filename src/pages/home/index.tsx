@@ -2,39 +2,20 @@ import { Header } from "../../components/header";
 import { GlobalStyles } from "../../style/global";
 import { GlobalReset } from "../../style/reset";
 import { CustomSearch } from "../../components/customSearch";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 export function Home() {
-  const [ data, setData ] = useState([] as DataType[])
-  const [ isLoading, setIsLoading ] = useState(true)
+  const getProducts = async () => { 
+    console.log(import.meta.env.VITE_DATABASE_URL)
+    const response =  await fetch(`${import.meta.env.VITE_DATABASE_URL}`)
+    const data = await response.json()
+    return data
+  }
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch('http://localhost:3000/medics')
-  //     const data = await res.json()
-  //     setData([...data])
-  //   }
-  //   fetchData()
-  // }, [])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resp= await fetch('https://ativa.nivel3ti.com.br:44472/wms_ativa/apiservice/orcamento/listaProdutosOrcamento.php', {
-          method: "GET"
-        })
-        const data = await resp.json()
-        console.log(data)
-        setData(data)
-        
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    fetchData()
-  }, [])
+  const { data, isLoading } = useQuery('products', getProducts, {
+    staleTime: 1000 * 60 * 60,
+  })
+ 
 
   return (
     <>
@@ -43,5 +24,5 @@ export function Home() {
       <Header />
       <CustomSearch isLoading={isLoading} data={data} />
     </>
-  )
+  );
 }

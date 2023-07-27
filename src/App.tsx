@@ -1,15 +1,18 @@
 import { Router } from "./Routes";
 import { BrowserRouter } from "react-router-dom";
 import { ModalProvider } from "./providers/modalContext";
-
+import { QueryClientProvider, QueryClient } from "react-query";
 function App() {
+  const queryClient = new QueryClient();
 
   return (
-    <BrowserRouter>
-      <ModalProvider>
-        <Router />
-      </ModalProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ModalProvider>
+          <Router />
+        </ModalProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

@@ -5,9 +5,9 @@ import { CustomTable } from "../customTable/index.js";
 import { ContainerFilterData } from "../containerFilterData/index.js";
 import { Form } from "../form/index.js";
 import { Footer } from "../Footer/index.js";
-import { CustomModal } from "../customModal/index.js";
 import { useModal } from "../../hooks/useModal/index.js";
-import { BounceLoader } from 'react-spinners'
+import { BounceLoader } from 'react-spinners';
+import { CustomModal } from "../customModal";
 interface CustomSearchProps extends DataTypeProps {
   isLoading: boolean
 }
@@ -31,19 +31,45 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
       }
     }
   }, []);
-
+  
   useEffect(() => {
     localStorage.setItem("@AtivaHospLogList", JSON.stringify(tableList));
   }, [tableList]);
 
+  const override: React.CSSProperties = {
+    display: "block",
+    margin: "8rem auto",
+  }
+  
+  if(isLoading) {
+     return (
+       <div style={{
+         margin: "0 auto",
+         width: "500px",
+         textAlign: "center",
+         color: "var(--color-grey-800)"
+       }}>
+       <BounceLoader 
+         cssOverride={override}
+         color="#3e96a9"
+         loading={isLoading}
+         size={150}
+         aria-label="Loading-Spinner"
+       />
+       <p>Estamos preparando tudo para você, aguarde...</p>
+       </div>
+     )
+   } 
+  
   const filteredData = data.filter((item: AtivaProductProps) => {
     const groupedName = (item.descricao_produto + item.fabricante).toLowerCase();
     const term = searchTerm.toLowerCase();
-
+    
     if (term.length >= 3) {
       return groupedName.includes(term);
     }
   });
+  
 
   function addItemToTable(item: AtivaProductProps) {
     const formattedTerm =
@@ -51,7 +77,7 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
     setSearchTerm(formattedTerm);
     setProduct(item);
   }
-
+  
   function handleSubmit(e: any) {
     e.preventDefault();
     setSearchTerm("");
@@ -77,37 +103,11 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
 
       const insertedProduct = {
         ...product,
-        "PF Sem Impostos": formattedPriceQuantity,
+        valor: String(formattedPriceQuantity),
         quantity: inputQuantity,
       };
       setTableList((state) => [...state, insertedProduct]);
     }
-  }
-
-const override: React.CSSProperties = {
-  display: "block",
-  margin: "8rem auto",
-}
-
-  if(isLoading) {
-    return (
-      <div style={{
-        margin: "0 auto",
-        width: "500px",
-        textAlign: "center",
-        color: "var(--color-grey-800)"
-      }}>
-      <BounceLoader 
-        cssOverride={override}
-        color="#3e96a9"
-        loading={isLoading}
-        size={150}
-        aria-label="Loading-Spinner"
-      />
-      <p>Estamos preparando tudo para você, aguarde...</p>
-      </div>
-      
-    )
   }
 
   return (
