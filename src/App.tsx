@@ -1,4 +1,4 @@
-import { Router } from "./Routes";
+import { Router } from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import { ModalProvider } from "./providers/modalContext";
 import { QueryClientProvider, QueryClient } from "react-query";
