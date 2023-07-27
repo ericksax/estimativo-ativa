@@ -8,7 +8,7 @@ interface CustomModalProps {
   setTableList: React.Dispatch<SetStateAction<AtivaProductProps[]>>;
 }
 
-export const CustomModal = ({ setTableList }: CustomModalProps) => {
+export const ModalCustom = ({ setTableList }: CustomModalProps) => {
   const { areYouSure, isOpen, sendMail } = useModal();
   return (
     <>

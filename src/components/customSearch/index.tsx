@@ -6,7 +6,7 @@ import { ContainerFilterData } from "../containerFilterData/index.js";
 import { Form } from "../form/index.js";
 import { Footer } from "../footer/index.js";
 import { useModal } from "../../hooks/useModal/index.js";
-import { CustomModal } from "../customModal/index.js";
+import { ModalCustom } from "../modalCustom/index.js";
 import { BounceLoader } from "react-spinners";
 
 interface CustomSearchProps extends DataTypeProps {
@@ -137,7 +137,7 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
         ) : null}
       </main>
       <Footer setAreYouSure={setAreYouSure} total={total} />
-      <CustomModal setTableList={setTableList}/>
+      <ModalCustom setTableList={setTableList}/>
     </Container>
   );
 }
