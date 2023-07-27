@@ -6,8 +6,9 @@ import { ContainerFilterData } from "../containerFilterData/index.js";
 import { Form } from "../form/index.js";
 import { Footer } from "../Footer/index.js";
 import { useModal } from "../../hooks/useModal/index.js";
-import { BounceLoader } from 'react-spinners';
-import { CustomModal } from "../customModal";
+import { CustomModal } from "../customModal/index.js";
+import { BounceLoader } from "react-spinners";
+
 interface CustomSearchProps extends DataTypeProps {
   isLoading: boolean
 }
