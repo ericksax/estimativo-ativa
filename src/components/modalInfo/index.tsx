@@ -6,16 +6,17 @@ import { useEffect } from "react";
 import { ErrorMessage, StyledModal } from "./styles";
 import { FaInfoCircle } from "react-icons/fa";
 import { useModal } from "../../hooks/useModal";
+import { CustomImputMask } from "../customInputMask";
 
 interface FormDataProps {
-  name: string
-  contact: string
-  cnpj: string
-  adress: string
+  name: string;
+  contact: string;
+  cnpj: string;
+  adress: string;
 }
 
 export function ModalInfo() {
- const {setIsOpen} = useModal()
+  const { setIsOpen } = useModal();
   const {
     register,
     handleSubmit,
@@ -42,7 +43,16 @@ export function ModalInfo() {
   }, []);
 
   function submit(formData: FormDataProps) {
-    localStorage.setItem("@EstimativOrc", JSON.stringify(formData));
+    const formatedCNPJ = formData.cnpj.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+      "$1.$2.$3/$4-$5"
+    );
+    const formatedData = {
+      ...formData,
+      cnpj: formatedCNPJ,
+    };
+    
+    localStorage.setItem("@EstimativOrc", JSON.stringify(formatedData));
     setIsOpen(false);
     reset();
   }
@@ -65,28 +75,26 @@ export function ModalInfo() {
               type="text"
               {...register("name")}
             />
-            {errors?.name && (
-              <ErrorMessage>{errors.name.message}</ErrorMessage>
-            )}
+            {errors?.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
             <Input
-              label={"Endereço: (Endereço completo. min 20 caractertes)"}
+              label={"Endereço: (Endereço completo. min 20 caracteres)"}
               type="text"
               {...register("adress")}
             />
             {errors?.adress && (
               <ErrorMessage>{errors.adress.message}</ErrorMessage>
             )}
-            <Input
-              label={"CNPJ: 00.000.000/0000-23"}
+            <CustomImputMask
+              label={"CNPJ: 00.000.000/0000-00"}
               type="text"
+              mask={"99.999.999/9999-99"}
               {...register("cnpj")}
             />
-            {errors?.cnpj && (
-              <ErrorMessage>{errors.cnpj.message}</ErrorMessage>
-            )}
-            <Input
-              label={"Telefone: (000)00000-0000"}
+            {errors?.cnpj && <ErrorMessage>{errors.cnpj.message}</ErrorMessage>}
+            <CustomImputMask
+              label={"Telefone: (00) 00000-0000"}
               type="text"
+              mask={"(99) 99999-9999"}
               {...register("contact")}
             />
             {errors?.contact && (
