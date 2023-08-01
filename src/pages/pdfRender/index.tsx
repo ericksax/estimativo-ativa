@@ -8,33 +8,32 @@ import { formatToCurrency } from "../../utils/utils";
 export const PDFRender = () => {
   const [contactInfo, setContactInfo] = useState({} as ContactProps);
   const [list, setList] = useState([] as AtivaProductProps[]);
-  const {counter, date} = usePdf()
+  const { counter, date } = usePdf();
 
   const total = formatToCurrency(
     list.reduce((acc, act) => acc + Number(act.valor), 0)
   );
 
-useEffect(() => {
-  const hasList =
-    Object.keys(JSON.parse(localStorage.getItem("@AtivaHospLogList")!))
-      .length > 0;
+  useEffect(() => {
+    const hasList =
+      Object.keys(JSON.parse(localStorage.getItem("@AtivaHospLogList")!))
+        .length > 0;
 
-  if (hasList) {
-    const productList = JSON.parse(
-      localStorage.getItem("@AtivaHospLogList")!
-    );
-    setList([...productList]);
-  }
+    if (hasList) {
+      const productList = JSON.parse(
+        localStorage.getItem("@AtivaHospLogList")!
+      );
+      setList([...productList]);
+    }
 
-  if (localStorage.getItem("@EstimativOrc")) {
-    const infos = JSON.parse(localStorage.getItem("@EstimativOrc")!);
-    setContactInfo(infos);
-  }
-
-}, []);
+    if (localStorage.getItem("@EstimativOrc")) {
+      const infos = JSON.parse(localStorage.getItem("@EstimativOrc")!);
+      setContactInfo(infos);
+    }
+  }, []);
   return (
     <PDFViewer style={styles.document}>
-      <Document>
+      <Document style={{ margin: 0, padding: 0 }}>
         <Page size="A4" style={styles.page} wrap>
           <View>
             <Text style={styles.title}>Orçamento Estimativo</Text>

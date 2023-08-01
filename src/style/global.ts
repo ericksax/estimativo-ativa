@@ -41,8 +41,4 @@ export const GlobalStyles = createGlobalStyle`
     overflow: auto;
   }
 
-`
-
-
-
-
+`;

@@ -5,7 +5,7 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border: 1px solid var(--color-grey-300);
+  border: 2px solid var(--color-grey-300);
   margin: 2rem 0 2rem;
   width: 100%;
   min-width: 52.4rem;
@@ -17,7 +17,6 @@ export const FormContainer = styled.div`
     width: 100%;
     min-width: 52.4rem;
   
-
     input {
       border: 1px solid var(--color-grey-300);
       font-size: 1.2rem;

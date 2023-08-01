@@ -15,7 +15,7 @@ export const ModalDestroy = ({setTableList}: ModalDestroyProps ) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleOutClick: any = (event: any) => {
+    const handleOutClick = (event: any) => {
       if (!modalRef.current?.contains(event.target)) {
         setAreYouSure(false);
       }
@@ -72,7 +72,7 @@ export const ModalDestroy = ({setTableList}: ModalDestroyProps ) => {
             ref={buttonRef}
             onClick={() => setAreYouSure(false)}
           >
-            não
+            Não
           </Button>
         </div>
       </CustomModalContainer>

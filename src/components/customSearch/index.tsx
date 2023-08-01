@@ -7,17 +7,18 @@ import { Form } from "../form/index.js";
 import { Footer } from "../footer/index.js";
 import { useModal } from "../../hooks/useModal/index.js";
 import { ModalCustom } from "../modalCustom/index.js";
-import { BounceLoader } from "react-spinners";
+import { CustomSpinner } from "../customSpinner/index.js";
 
-interface CustomSearchProps extends DataTypeProps {
-  isLoading: boolean
+interface CustomSearchProps {
+  isLoading: boolean;
 }
 
-export function CustomSearch({ data, isLoading }: CustomSearchProps) {
+export function CustomSearch({ isLoading }: CustomSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [tableList, setTableList] = useState([] as AtivaProductProps[]);
   const [product, setProduct] = useState({} as AtivaProductProps);
   const [inputQuantity, setInputQuantity] = useState(1);
+  const [filteredData, setFilteredData] = useState([] as AtivaProductProps[]);
   const { setAreYouSure } = useModal();
   const total = tableList.reduce((acc, act) => acc + Number(act.valor), 0);
 
@@ -32,53 +33,32 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
       }
     }
   }, []);
-  
+
   useEffect(() => {
     localStorage.setItem("@AtivaHospLogList", JSON.stringify(tableList));
   }, [tableList]);
 
-  const override: React.CSSProperties = {
-    display: "block",
-    margin: "8rem auto",
+  if (isLoading) {
+    return <CustomSpinner isLoading={isLoading} />;
   }
-  
-  if(isLoading) {
-     return (
-       <div style={{
-         margin: "0 auto",
-         width: "500px",
-         textAlign: "center",
-         color: "var(--color-grey-800)"
-       }}>
-       <BounceLoader 
-         cssOverride={override}
-         color="#3e96a9"
-         loading={isLoading}
-         size={150}
-         aria-label="Loading-Spinner"
-       />
-       <p>Estamos preparando tudo para você, aguarde...</p>
-       </div>
-     )
-   } 
-  
-  const filteredData = data.filter((item: AtivaProductProps) => {
-    const groupedName = (item.descricao_produto + item.fabricante).toLowerCase();
-    const term = searchTerm.toLowerCase();
-    
-    if (term.length >= 3) {
-      return groupedName.includes(term);
-    }
-  });
-  
+
+  // const filteredData = data.filter((item: AtivaProductProps) => {
+  //   const groupedName = (
+  //     item.descricao_produto + item.fabricante
+  //   ).toLowerCase();
+  //   const term = searchTerm.toLowerCase();
+
+  //   if (term.length >= 3) {
+  //     return groupedName.includes(term);
+  //   }
+  // });
 
   function addItemToTable(item: AtivaProductProps) {
-    const formattedTerm =
-      item.descricao_produto + " - " + item.fabricante;
+    const formattedTerm = item.descricao_produto; /*+ " - " + item.fabricante;*/
     setSearchTerm(formattedTerm);
     setProduct(item);
   }
-  
+
   function handleSubmit(e: any) {
     e.preventDefault();
     setSearchTerm("");
@@ -87,14 +67,13 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
     const hasOnTableList = tableList.find(
       (item) => item.id_produto == product.id_produto
     );
-    
-    const formattedPrice =
-      parseFloat(product.valor.split(",").join("")) / 100;
 
+    // const formattedPrice = parseFloat(product.valor.split(",").join("")) / 100;
+    const formattedPrice = product.valor / 100;
     if (hasOnTableList) {
       const price = formattedPrice;
       hasOnTableList.quantity = hasOnTableList.quantity + inputQuantity;
-      hasOnTableList.valor = (hasOnTableList.quantity * price).toString();
+      hasOnTableList.valor = hasOnTableList.quantity * price;
 
       return setTableList((state) => [...state]);
     }
@@ -104,11 +83,12 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
 
       const insertedProduct = {
         ...product,
-        valor: String(formattedPriceQuantity),
+        valor: formattedPriceQuantity,
         quantity: inputQuantity,
       };
       setTableList((state) => [...state, insertedProduct]);
     }
+    setProduct({} as AtivaProductProps);
   }
 
   return (
@@ -120,14 +100,15 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
           setSearchTerm={setSearchTerm}
           setInputQuantity={setInputQuantity}
           inputQuantity={inputQuantity}
+          setFilteredData={setFilteredData}
         />
-        {filteredData.length > 0 && searchTerm != product.descricao_produto && (
+        {filteredData.length > 0 && searchTerm != product.descricao_produto ? (
           <ContainerFilterData
             filteredData={filteredData}
             searchTerm={searchTerm}
             addItemToTable={addItemToTable}
           />
-        )}
+        ) : null}
         <CustomTable setTableList={setTableList} tableList={tableList} />
         {tableList.length == 0 ? (
           <EmptyList>
@@ -137,7 +118,7 @@ export function CustomSearch({ data, isLoading }: CustomSearchProps) {
         ) : null}
       </main>
       <Footer setAreYouSure={setAreYouSure} total={total} />
-      <ModalCustom setTableList={setTableList}/>
+      <ModalCustom setTableList={setTableList} />
     </Container>
   );
 }
