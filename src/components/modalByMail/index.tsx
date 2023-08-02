@@ -6,7 +6,7 @@ import { ModalSendMailContainer } from "./style";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useModal } from "../../hooks/useModal";
 import { api } from "../../servers/api";
-
+import { toast } from 'react-toastify';
 interface ModalSendByMailProps {
   email: string
 }
@@ -30,6 +30,18 @@ export const ModalSendByMail = () => {
           "Content-Type": "application/json",
         }
       })
+
+      toast.success('Email enviado com sucesso!!!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+      
     } catch (error) {
       console.log(error)
     }
