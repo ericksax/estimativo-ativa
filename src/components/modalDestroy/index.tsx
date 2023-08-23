@@ -1,15 +1,13 @@
 import { SetStateAction, useEffect, useRef } from "react";
-
 import { Button } from "../../style/buttons";
 import { CustomModalContainer, StyledModal } from "./style";
 import { useModal } from "../../hooks/useModal";
-
 interface ModalDestroyProps {
-  setTableList: React.Dispatch<SetStateAction<AtivaProductProps[]>>
+  setTableList: React.Dispatch<SetStateAction<AtivaProductProps[]>>;
 }
 
-export const ModalDestroy = ({setTableList}: ModalDestroyProps ) => {
-  const { setAreYouSure, setIsOpen,  } = useModal()
+export const ModalDestroy = ({ setTableList }: ModalDestroyProps) => {
+  const { setAreYouSure, setIsOpen } = useModal();
 
   const modalRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);

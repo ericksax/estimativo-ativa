@@ -57,8 +57,7 @@ export const ModalSendByMail = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-      }
-      )
+      });
       console.log(error);
     }
     setSendMail(false);

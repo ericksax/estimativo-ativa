@@ -9,7 +9,7 @@ interface FooterProps {
 }
 
 export const Footer = ({ total }: FooterProps) => {
-  const {setAreYouSure, setSendMail} = useModal()
+  const { setAreYouSure, setSendMail } = useModal();
   return (
     <StyledFooter>
       <div className="wrapper">
@@ -18,7 +18,7 @@ export const Footer = ({ total }: FooterProps) => {
           <Link to="/pdf_document">
             <button>Imprimir</button>
           </Link>
-          <button onClick={()=> setSendMail(true)}>Enviar por e-mail</button>
+          <button onClick={() => setSendMail(true)}>Enviar por e-mail</button>
         </aside>
         <strong>
           <span>Total </span>

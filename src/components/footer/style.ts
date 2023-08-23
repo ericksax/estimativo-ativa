@@ -7,7 +7,7 @@ export const StyledFooter = styled.footer`
   width: 100%;
   background-color: white;
   border-top: 1px solid var(--color-grey-300);
-  
+
   div {
     display: flex;
     justify-content: space-between;
@@ -25,7 +25,7 @@ export const StyledFooter = styled.footer`
   }
 
   strong span {
-    color: var(--color-grey-600)
+    color: var(--color-grey-600);
   }
 
   @media (max-width: 320px) {
@@ -35,4 +35,4 @@ export const StyledFooter = styled.footer`
       font-size: 1rem;
     }
   }
-`
+`;
