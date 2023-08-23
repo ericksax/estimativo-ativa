@@ -13,15 +13,15 @@ export const StyledModal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   > div {
     background-color: white;
     padding: 2rem;
     width: 42rem;
-   
+
     h2 {
       margin-bottom: 1rem;
-      color: var(--color-grey-800)
+      color: var(--color-grey-800);
     }
 
     form {
@@ -78,7 +78,7 @@ export const CustomModalContainer = styled.div`
     background-color: var(--color-brand-3);
     width: 100%;
     margin-bottom: 2rem;
-    
+
     > button {
       color: var(--color-grey-100);
       padding: 1rem;

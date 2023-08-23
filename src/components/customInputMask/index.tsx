@@ -3,8 +3,8 @@ import InputMask, { ReactInputMask } from "react-input-mask";
 import { StyledInput } from "../Input/style";
 
 interface CustomInputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  mask: string
+  label?: string;
+  mask: string;
 }
 
 export const CustomImputMask = forwardRef(
@@ -14,12 +14,8 @@ export const CustomImputMask = forwardRef(
   ) => {
     return (
       <StyledInput>
-        {label ? <label>{label}</label>: null}
-        <InputMask
-          mask={mask}
-          {...rest}
-          ref={ref}
-        />
+        {label ? <label>{label}</label> : null}
+        <InputMask mask={mask} {...rest} ref={ref} />
       </StyledInput>
     );
   }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ModalSendMailContainer = styled.div`
   position: relative;
-  
+
   > button {
     position: absolute;
     top: 1.6rem;
@@ -14,6 +14,6 @@ export const ModalSendMailContainer = styled.div`
   }
 
   input {
-    margin-bottom: .4rem;
+    margin-bottom: 0.4rem;
   }
-`
+`;

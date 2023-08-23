@@ -31,6 +31,6 @@ export const Container = styled.div`
     font-weight: 900;
     font-style: italic;
     font-size: 10px;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 `;

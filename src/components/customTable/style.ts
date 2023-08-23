@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledTable = styled.table`
   width: 100%;
   font-size: 11px;
-  
+
   tr {
     height: 6rem;
   }
@@ -16,4 +16,4 @@ export const StyledTable = styled.table`
     padding: 1rem;
     background-color: var(--color-grey-300);
   }
-`
+`;

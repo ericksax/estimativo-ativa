@@ -4,7 +4,7 @@ import { FaFolderOpen } from "react-icons/fa";
 import { CustomTable } from "../customTable/index.js";
 import { ContainerFilterData } from "../containerFilterData/index.js";
 import { Form } from "../form/index.js";
-import { Footer } from "../Footer/index.js";
+import { Footer } from "../footer/index.js";
 import { useModal } from "../../hooks/useModal/index.js";
 import { ModalCustom } from "../modalCustom/index.js";
 import { CustomSpinner } from "../customSpinner/index.js";

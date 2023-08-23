@@ -1,4 +1,4 @@
 interface TableListProps {
-  tableList: AtivaProductProps[],
-  setTableList: ([]: ProductProps[]) => void,
+  tableList: AtivaProductProps[];
+  setTableList: ([]: ProductProps[]) => void;
 }

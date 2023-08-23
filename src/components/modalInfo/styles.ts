@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const StyledModal = styled.div`
   position: absolute;
   top: 0;
@@ -12,15 +11,15 @@ export const StyledModal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   > div {
     background-color: white;
     padding: 2rem;
     width: 42rem;
-   
+
     h2 {
       margin-bottom: 1rem;
-      color: var(--color-grey-800)
+      color: var(--color-grey-800);
     }
 
     form {

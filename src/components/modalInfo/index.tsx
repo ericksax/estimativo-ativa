@@ -51,7 +51,7 @@ export function ModalInfo() {
       ...formData,
       cnpj: formatedCNPJ,
     };
-    
+
     localStorage.setItem("@EstimativOrc", JSON.stringify(formatedData));
     setIsOpen(false);
     reset();

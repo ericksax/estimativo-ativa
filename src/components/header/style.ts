@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledHeader = styled.header`
   display: flex;
-  align-items: center; 
+  align-items: center;
   background-color: var(--color-brand-1);
   width: 100%;
   padding: 0.8rem 0;
@@ -19,4 +19,4 @@ export const StyledHeader = styled.header`
     max-width: 120rem;
     padding: 0 4rem;
   }
-`
+`;
