@@ -11,6 +11,7 @@ import { styles } from "./styles";
 import { usePdf } from "../../hooks/usePdf";
 import { ContactProps } from "../../providers/pdfContext";
 import { formatQuantity, formatToCurrency } from "../../utils/utils";
+import { AtivaProductProps } from "./@types";
 import Logo from "../../assets/logomarca-ativa-hospitalar-black.png";
 
 export const PDFRender = () => {

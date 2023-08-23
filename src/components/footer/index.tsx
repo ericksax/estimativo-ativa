@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { SetStateAction } from "react";
 import { useModal } from "../../hooks/useModal";
 import { StyledFooter } from "./style";
-import { formatToCurrency } from "../../utils";
+import { formatToCurrency } from "../../utils/utils";
 interface FooterProps {
   total: number;
   setAreYouSure: React.Dispatch<SetStateAction<boolean>>;
