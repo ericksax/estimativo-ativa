@@ -83,7 +83,9 @@ export const styles = StyleSheet.create({
     height: "100px",
     padding: "8px",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     gap: 8,
   },
 

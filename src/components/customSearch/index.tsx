@@ -42,17 +42,6 @@ export function CustomSearch({ isLoading }: CustomSearchProps) {
     return <CustomSpinner isLoading={isLoading} />;
   }
 
-  // const filteredData = data.filter((item: AtivaProductProps) => {
-  //   const groupedName = (
-  //     item.descricao_produto + item.fabricante
-  //   ).toLowerCase();
-  //   const term = searchTerm.toLowerCase();
-
-  //   if (term.length >= 3) {
-  //     return groupedName.includes(term);
-  //   }
-  // });
-
   function addItemToTable(item: AtivaProductProps) {
     const formattedTerm = item.descricao_produto; /*+ " - " + item.fabricante;*/
     setSearchTerm(formattedTerm);
@@ -68,13 +57,11 @@ export function CustomSearch({ isLoading }: CustomSearchProps) {
       (item) => item.id_produto == product.id_produto
     );
 
-    // const formattedPrice = parseFloat(product.valor.split(",").join("")) / 100;
     const formattedPrice = product.valor / 100;
     if (hasOnTableList) {
       const price = formattedPrice;
       hasOnTableList.quantity = hasOnTableList.quantity + inputQuantity;
       hasOnTableList.valor = hasOnTableList.quantity * price;
-
       return setTableList((state) => [...state]);
     }
 

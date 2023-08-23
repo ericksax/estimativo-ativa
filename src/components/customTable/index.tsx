@@ -14,7 +14,7 @@ export function CustomTable({ tableList, setTableList }: TableListProps) {
   const formatedTableList = tableList.map((item: AtivaProductProps) => {
     item = {
       ...item,
-      valor: String(formatToCurrency(Number(Number(item.valor).toFixed(2))))
+      valor: Number(formatToCurrency((item.valor)))
     }
   })
 

@@ -1,9 +1,10 @@
-import { Page, Text, View, Document, PDFViewer } from "@react-pdf/renderer";
+import { Page, Text, View, Document, PDFViewer, Image } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
 import { usePdf } from "../../hooks/usePdf";
 import { ContactProps } from "../../providers/pdfContext";
-import { formatToCurrency } from "../../utils/utils";
+import { formatQuantity, formatToCurrency } from "../../utils/utils";
+import Logo from "../../assets/logomarca-ativa-hospitalar-black.png"
 
 export const PDFRender = () => {
   const [contactInfo, setContactInfo] = useState({} as ContactProps);
@@ -13,6 +14,8 @@ export const PDFRender = () => {
   const total = formatToCurrency(
     list.reduce((acc, act) => acc + Number(act.valor), 0)
   );
+
+ const formattedQuantity = 
 
   useEffect(() => {
     const hasList =
@@ -40,11 +43,14 @@ export const PDFRender = () => {
           </View>
           <View style={styles.section}>
             <div style={styles.topHeader}>
-              <Text style={styles.bold}>ATIVA MEDICO CIRÚRGICA LTDA</Text>
-              <Text>CNPJ : 09.182.725/0001-12</Text>
-              <Text>AV VEREADOR RAYMUNDO HARGREAVES, 98 - MILHO BRANCO </Text>
-              <Text>JUIZ DE FORA - MG - 36083-770</Text>
-              <Text>Tel: (32)2101-1556</Text>
+              <View>
+                <Text style={styles.bold}>ATIVA MEDICO CIRÚRGICA LTDA</Text>
+                <Text>CNPJ : 09.182.725/0001-12</Text>
+                <Text>AV VEREADOR RAYMUNDO HARGREAVES, 98 - MILHO BRANCO </Text>
+                <Text>JUIZ DE FORA - MG - 36083-770</Text>
+                <Text>Tel: (32)2101-1556</Text>
+              </View>
+              <Image style={{width: "140px", height:"54px"}} src={Logo}/>
             </div>
           </View>
           <View>
@@ -68,7 +74,7 @@ export const PDFRender = () => {
           <View style={styles.section}>
             <View style={styles.table}>
               <View style={[styles.row, styles.bold, styles.header]}>
-                <Text style={styles.row0}>Sequencia</Text>
+                <Text style={styles.row0}>Código</Text>
                 <Text style={styles.row1}>Nome</Text>
                 <Text style={styles.row2}>Apresentação</Text>
                 <Text style={styles.row3}>Laboratório</Text>
@@ -76,10 +82,12 @@ export const PDFRender = () => {
                 <Text style={styles.row5}>Valor</Text>
               </View>
               {list.map((item, i) => {
-                const numItem = i + 1;
+             
+                const quantity = formatQuantity(item.quantity)
+                const price = formatToCurrency(item.valor)
                 return (
                   <View key={i} style={styles.row} wrap={false}>
-                    <Text style={styles.row0}>{numItem}</Text>
+                    <Text style={styles.row0}>{item.id_produto}</Text>
                     <Text style={styles.row1}>{item.descricao_produto}</Text>
                     <Text style={styles.row2}>
                       {" "}
@@ -88,9 +96,9 @@ export const PDFRender = () => {
                     <Text style={styles.row3}>
                       {item.fabricante.substring(0, 20) + "..."}
                     </Text>
-                    <Text style={styles.row4}>{item.quantity}</Text>
+                    <Text style={styles.row4}>{quantity}</Text>
                     <Text style={styles.row5}>
-                      {Number(item.valor).toFixed(2)}
+                      {price}
                     </Text>
                   </View>
                 );
