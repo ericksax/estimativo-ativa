@@ -1,10 +1,17 @@
-import { Page, Text, View, Document, PDFViewer, Image } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  PDFViewer,
+  Image,
+} from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
 import { usePdf } from "../../hooks/usePdf";
 import { ContactProps } from "../../providers/pdfContext";
 import { formatQuantity, formatToCurrency } from "../../utils/utils";
-import Logo from "../../assets/logomarca-ativa-hospitalar-black.png"
+import Logo from "../../assets/logomarca-ativa-hospitalar-black.png";
 
 export const PDFRender = () => {
   const [contactInfo, setContactInfo] = useState({} as ContactProps);
@@ -14,8 +21,6 @@ export const PDFRender = () => {
   const total = formatToCurrency(
     list.reduce((acc, act) => acc + Number(act.valor), 0)
   );
-
- const formattedQuantity = 
 
   useEffect(() => {
     const hasList =
@@ -50,7 +55,7 @@ export const PDFRender = () => {
                 <Text>JUIZ DE FORA - MG - 36083-770</Text>
                 <Text>Tel: (32)2101-1556</Text>
               </View>
-              <Image style={{width: "140px", height:"54px"}} src={Logo}/>
+              <Image style={{ width: "140px", height: "54px" }} src={Logo} />
             </div>
           </View>
           <View>
@@ -82,9 +87,8 @@ export const PDFRender = () => {
                 <Text style={styles.row5}>Valor</Text>
               </View>
               {list.map((item, i) => {
-             
-                const quantity = formatQuantity(item.quantity)
-                const price = formatToCurrency(item.valor)
+                const quantity = formatQuantity(item.quantity);
+                const price = formatToCurrency(item.valor);
                 return (
                   <View key={i} style={styles.row} wrap={false}>
                     <Text style={styles.row0}>{item.id_produto}</Text>
@@ -97,9 +101,7 @@ export const PDFRender = () => {
                       {item.fabricante.substring(0, 20) + "..."}
                     </Text>
                     <Text style={styles.row4}>{quantity}</Text>
-                    <Text style={styles.row5}>
-                      {price}
-                    </Text>
+                    <Text style={styles.row5}>{price}</Text>
                   </View>
                 );
               })}
