@@ -7,7 +7,7 @@ export function ContainerFilterData({
 }: ContainerFilterDataProps) {
   return (
     <>
-      {filteredData.length > 0 ? (
+      {searchTerm && filteredData.length > 0 ? (
         <Container>
           <ul>
             {filteredData.map(

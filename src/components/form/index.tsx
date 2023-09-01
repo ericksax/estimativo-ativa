@@ -14,15 +14,20 @@ export function Form({
       searchTerm: searchTerm,
     };
     if (searchTerm.length >= 3) {
-      const response = await fetch(import.meta.env.VITE_DATABASE_URL, {
-        body: JSON.stringify(termo),
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setFilteredData(data);
+      try {
+        const response = await fetch(import.meta.env.VITE_DATABASE_URL, {
+          body: JSON.stringify(termo),
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setFilteredData(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

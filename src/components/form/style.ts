@@ -5,7 +5,7 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border: 2px solid var(--color-grey-300);
+  border: 1px solid var(--color-grey-300);
   margin: 2rem 0 2rem;
   width: 100%;
   min-width: 52.4rem;
@@ -16,7 +16,7 @@ export const FormContainer = styled.div`
     padding: 1rem;
     width: 100%;
     min-width: 52.4rem;
-  
+
     input {
       border: 1px solid var(--color-grey-300);
       font-size: 1.2rem;
@@ -24,7 +24,7 @@ export const FormContainer = styled.div`
       width: 100%;
     }
 
-    input[type='number'] {
+    input[type="number"] {
       max-width: 8rem;
     }
 
@@ -35,4 +35,4 @@ export const FormContainer = styled.div`
       padding: 1rem 1.5rem;
     }
   }
-`  
+`;
