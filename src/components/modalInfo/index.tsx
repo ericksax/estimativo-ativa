@@ -7,7 +7,9 @@ import { ErrorMessage, StyledModal } from "./styles";
 import { FaInfoCircle } from "react-icons/fa";
 import { useModal } from "../../hooks/useModal";
 import { CustomImputMask } from "../customInputMask";
+import { insertCNPJMask } from "../../utils/utils";
 
+let arrayCount = [];
 interface FormDataProps {
   name: string;
   contact: string;
@@ -38,16 +40,17 @@ export function ModalInfo() {
     } else {
       setIsOpen(true);
     }
-
-    // return () => document.body.classList.remove(".no-scroll");
   }, []);
 
   function submit(formData: FormDataProps) {
-    const formatedCNPJ = formData.cnpj.replace(
-      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
-      "$1.$2.$3/$4-$5"
-    );
+    const formatedCNPJ = insertCNPJMask(formData.cnpj);
+
+    const simpleCount = () => {
+      arrayCount.push("item");
+      return arrayCount.length;
+    };
     const formatedData = {
+      id: simpleCount(),
       ...formData,
       cnpj: formatedCNPJ,
     };

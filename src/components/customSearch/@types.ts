@@ -5,4 +5,5 @@ interface AtivaProductProps {
   embalagem: string;
   valor: number;
   quantity: number;
+  valid_reg_anvisa: string;
 }

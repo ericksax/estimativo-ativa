@@ -6,3 +6,11 @@ export interface AtivaProductProps {
   valor: number;
   quantity: number;
 }
+
+export interface ContactProps {
+  name: string;
+  contact: string;
+  adress: string;
+  cnpj: string;
+  id: number;
+}

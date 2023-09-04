@@ -25,18 +25,20 @@ export function Form({
         const data = await response.json();
         const actualDate = new Date();
 
-        const vigentProducts = data.filter((product: any) => {
-          const partDate = product.valid_reg_anvisa.split("/");
-          const vigentDate = new Date(
-            partDate[2],
-            partDate[1] - 1,
-            partDate[0]
-          );
+        const vigentProducts: AtivaProductProps[] = data.filter(
+          (product: AtivaProductProps) => {
+            const partDate = product?.valid_reg_anvisa.split("/");
+            const vigentDate = new Date(
+              Number(partDate[2]),
+              Number(partDate[1]) - 1,
+              Number(partDate[0])
+            );
 
-          return (
-            product.valid_reg_anvisa === "VIGENTE" || vigentDate > actualDate
-          );
-        });
+            return (
+              product.valid_reg_anvisa === "VIGENTE" || vigentDate > actualDate
+            );
+          }
+        );
         setFilteredData(vigentProducts);
       } catch (error) {
         console.log(error);

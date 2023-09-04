@@ -8,17 +8,14 @@ import {
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
-import { usePdf } from "../../hooks/usePdf";
-import { ContactProps } from "../../providers/pdfContext";
 import { formatQuantity, formatToCurrency } from "../../utils/utils";
-import { AtivaProductProps } from "./@types";
+import { AtivaProductProps, ContactProps } from "./@types";
 import Logo from "../../assets/logomarca-ativa-hospitalar-black.png";
 
 export const PDFRender = () => {
   const [contactInfo, setContactInfo] = useState({} as ContactProps);
   const [list, setList] = useState([] as AtivaProductProps[]);
-  const { counter, date } = usePdf();
-
+  const date = new Date().toLocaleDateString("pt-br");
   const total = formatToCurrency(
     list.reduce((acc, act) => acc + Number(act.valor), 0)
   );
@@ -61,7 +58,7 @@ export const PDFRender = () => {
           </View>
           <View>
             <div style={styles.subHeader}>
-              <Text>Número do pedido:{" " + counter}</Text>
+              <Text>Número do pedido:{" " + contactInfo.id}</Text>
               <Text>Data: {date}</Text>
             </div>
             <div style={styles.flex_between}>
