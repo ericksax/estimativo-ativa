@@ -58,7 +58,7 @@ export const PDFRender = () => {
           </View>
           <View>
             <div style={styles.subHeader}>
-              <Text>Número do pedido:{" " + contactInfo.id}</Text>
+              <Text>Número do pedido:{" " + contactInfo.id || 1}</Text>
               <Text>Data: {date}</Text>
             </div>
             <div style={styles.flex_between}>

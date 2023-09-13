@@ -15,10 +15,30 @@ export const Footer = ({ total }: FooterProps) => {
       <div className="wrapper">
         <aside>
           <button onClick={() => setAreYouSure(true)}>Excluir</button>
-          <Link to="/pdf_document">
+          <Link to="/pdf_document" target="_blank">
             <button>Imprimir</button>
           </Link>
-          <button onClick={() => setSendMail(true)}>Enviar por e-mail</button>
+          <button
+            onClick={async () => {
+              setSendMail(true);
+              const list = localStorage.getItem("@AtivaHospLogList");
+              const info = localStorage.getItem("@EstimativOrc");
+
+              const objectBody = {
+                list,
+                info,
+              };
+
+              await fetch("http://address/", {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(objectBody),
+              });
+            }}
+          >
+            Enviar por e-mail
+          </button>
         </aside>
         <strong>
           <span>Total </span>

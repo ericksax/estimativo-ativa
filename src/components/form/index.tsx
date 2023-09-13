@@ -34,9 +34,7 @@ export function Form({
               Number(partDate[0])
             );
 
-            return (
-              product.valid_reg_anvisa === "VIGENTE" || vigentDate > actualDate
-            );
+            return vigentDate > actualDate;
           }
         );
         setFilteredData(vigentProducts);
