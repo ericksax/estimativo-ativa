@@ -37,7 +37,6 @@ export function Form({
             return vigentDate > actualDate;
           }
         );
-        console.log(vigentProducts);
         setFilteredData(vigentProducts);
       } catch (error) {
         console.log(error);
