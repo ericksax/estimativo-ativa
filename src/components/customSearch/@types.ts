@@ -1,5 +1,6 @@
 interface AtivaProductProps {
   id_produto: number;
+  data_validade: string;
   descricao_produto: string;
   fabricante: string;
   embalagem: string;

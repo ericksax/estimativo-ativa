@@ -27,16 +27,17 @@ export function Form({
 
         const vigentProducts: AtivaProductProps[] = data.filter(
           (product: AtivaProductProps) => {
-            const partDate = product?.valid_reg_anvisa.split("/");
+            const partDate = product?.data_validade.split("-");
             const vigentDate = new Date(
-              Number(partDate[2]),
+              Number(partDate[0]),
               Number(partDate[1]) - 1,
-              Number(partDate[0])
+              Number(partDate[2])
             );
 
             return vigentDate > actualDate;
           }
         );
+        console.log(vigentProducts);
         setFilteredData(vigentProducts);
       } catch (error) {
         console.log(error);

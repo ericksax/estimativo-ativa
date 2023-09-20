@@ -74,7 +74,7 @@ export function ModalInfo() {
           </div>
           <form onSubmit={handleSubmit(submit)}>
             <Input
-              label={"Nome: (min 3 caracteres)"}
+              label={"Nome da empresa: (min 3 caracteres)"}
               type="text"
               {...register("name")}
             />
