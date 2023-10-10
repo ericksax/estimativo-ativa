@@ -5,16 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, ErrorMessage } from "./styles";
 import { Button } from "../../style/buttons";
 import { insertCNPJMask } from "../../utils/utils";
-
-import {
-  FormValuesProps,
-  zodModalSchema,
-} from "../../components/modalInfo/zodModalSchema";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalConcent } from "../../components/modalConcent";
-
-let arrayCount = [];
+import { zodInfoSchema, FormValuesProps } from "./ZodInfoSchema";
 
 interface FormDataProps {
   name: string;
@@ -24,6 +18,7 @@ interface FormDataProps {
   email: string;
 }
 
+const arrayCount = [];
 export const FormInfo = () => {
   const navigate = useNavigate();
 
@@ -38,13 +33,12 @@ export const FormInfo = () => {
     register,
     handleSubmit,
     reset,
-    formState: { isValid, errors },
+    formState: { errors },
   } = useForm<FormValuesProps>({
-    resolver: zodResolver(zodModalSchema),
+    resolver: zodResolver(zodInfoSchema),
   });
 
   function submit(formData: FormDataProps) {
-    // setIsOpen(true);
     const formatedCNPJ = insertCNPJMask(formData.cnpj);
 
     const simpleCount = () => {

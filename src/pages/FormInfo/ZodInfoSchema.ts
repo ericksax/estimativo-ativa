@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const zodModalSchema = z.object({
+export const zodInfoSchema = z.object({
   name: z
     .string()
     .min(3, "O nome deve possuir no mínimo três caracteres.")
@@ -27,4 +27,4 @@ export const zodModalSchema = z.object({
     ),
 });
 
-export type FormValuesProps = z.infer<typeof zodModalSchema>;
+export type FormValuesProps = z.infer<typeof zodInfoSchema>;
