@@ -49,7 +49,7 @@ export const PDFRender = () => {
               <View>
                 <Text style={styles.bold}>ATIVA MEDICO CIRÚRGICA LTDA</Text>
                 <Text>CNPJ : 09.182.725/0001-12</Text>
-                <Text>AV VEREADOR RAYMUNDO HARGREAVES, 98 - MILHO BRANCO </Text>
+                <Text>AV VEREADOR RAYMUNDO HARGREAVES, 98 - FONTESVILLE </Text>
                 <Text>JUIZ DE FORA - MG - 36083-770</Text>
                 <Text>Tel: (32)2101-1556</Text>
               </View>
@@ -66,7 +66,10 @@ export const PDFRender = () => {
                 Cliente: {contactInfo.name}
               </Text>
               <Text style={styles.subHeader_info}>
-                Endereço: {contactInfo.adress}
+                Solicitante: {contactInfo.requester}
+              </Text>
+              <Text style={styles.subHeader_info}>
+                e-mail: {contactInfo.email}
               </Text>
               <Text style={styles.subHeader_info}>
                 CNPJ: {contactInfo.cnpj}
@@ -115,7 +118,7 @@ export const PDFRender = () => {
             <Text fixed>Orçamento Estimativo válido por 10 dias</Text>
             <Text fixed>
               ATIVA MÉDICO CIRÚRGICA - AV VEREADOR RAYMUNDO HARGREAVES, 98 -
-              MILHO BRANCO JUIZ DE FORA - MG - 36083-770
+              FONTESVILLE JUIZ DE FORA - MG - 36083-770
             </Text>
           </View>
         </Page>

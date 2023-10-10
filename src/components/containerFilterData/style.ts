@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: fixed;
-  top: 17.8rem;
+  position: absolute;
+  top: 7.6rem;
   display: flex;
   background-color: white;
-  max-height: 40rem;
+  max-height: 32rem;
   border: 1px solid var(--color-grey-300);
   overflow-y: auto;
   width: 100%;
@@ -13,9 +13,12 @@ export const Container = styled.div`
 
   ul {
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   li {
+    display: flex;
     font-size: 1.2rem;
     cursor: pointer;
     padding: 0.5rem;
@@ -27,6 +30,12 @@ export const Container = styled.div`
     }
   }
 
+  .price {
+    display: flex;
+    flex: 1;
+    font-weight: bold;
+    justify-content: flex-end;
+  }
   .subInfo {
     font-weight: 900;
     font-style: italic;

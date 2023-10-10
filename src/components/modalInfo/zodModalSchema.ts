@@ -5,10 +5,14 @@ export const zodModalSchema = z.object({
     .string()
     .min(3, "O nome deve possuir no mínimo três caracteres.")
     .nonempty(),
-  adress: z.string().min(20, "Preencha o endereço completo.").nonempty(),
+  requester: z
+    .string()
+    .min(3, "O nome deve possuir no mínimo três caracteres.")
+    .nonempty(),
+  email: z.string().email("Insira um email válido."),
   cnpj: z
     .string()
-    .min(14)
+    .min(14, "CNPJ deve conter no mínimo 14 caracteres.")
     .regex(
       new RegExp(/^(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/),
       "CNPJ inválido"
@@ -16,8 +20,11 @@ export const zodModalSchema = z.object({
     .nonempty(),
   contact: z
     .string()
-    .min(10, "Contato deve ter no mínimo doze caracteres")
-    .nonempty(),
+    .min(11, "Contato deve ter no mínimo doze caracteres")
+    .regex(
+      new RegExp(/^\([1-9]{2}\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/),
+      "Contato Inválido"
+    ),
 });
 
 export type FormValuesProps = z.infer<typeof zodModalSchema>;

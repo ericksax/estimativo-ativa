@@ -3,22 +3,28 @@ import React, { SetStateAction } from "react";
 import { useModal } from "../../hooks/useModal";
 import { StyledFooter } from "./styles";
 import { formatToCurrency } from "../../utils/utils";
+import { Button } from "../../style/buttons";
 interface FooterProps {
   total: number;
   setAreYouSure: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export const Footer = ({ total }: FooterProps) => {
-  const { setAreYouSure, setSendMail } = useModal();
+  const { setAreYouSure, setSendMail, setClean } = useModal();
+  const formattedTotal = formatToCurrency(total);
+
   return (
     <StyledFooter>
       <div className="wrapper">
         <aside>
-          <button onClick={() => setAreYouSure(true)}>Excluir</button>
+          <Button variant="primary" onClick={() => setAreYouSure(true)}>
+            Excluir
+          </Button>
           <Link to="/pdf_document" target="_blank">
-            <button>Imprimir</button>
+            <Button variant="primary">Imprimir</Button>
           </Link>
-          <button
+          <Button
+            variant="primary"
             onClick={async () => {
               setSendMail(true);
               const list = localStorage.getItem("@AtivaHospLogList");
@@ -38,11 +44,14 @@ export const Footer = ({ total }: FooterProps) => {
             }}
           >
             Enviar por e-mail
-          </button>
+          </Button>
+          <Button variant="primary" onClick={() => setClean(true)}>
+            Apagar lista
+          </Button>
         </aside>
         <strong>
           <span>Total </span>
-          {formatToCurrency(total)}
+          {formattedTotal}
         </strong>
       </div>
     </StyledFooter>

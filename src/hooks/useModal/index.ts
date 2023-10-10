@@ -1,15 +1,25 @@
-import { useContext } from "react"
-import { ModalContext } from "../../providers/modalContext"
+import { useContext } from "react";
+import { ModalContext } from "../../providers/modalContext";
 
 export function useModal() {
-  const { isOpen, setIsOpen, areYouSure, setAreYouSure, sendMail, setSendMail } = useContext(ModalContext)
-  return {
-    isOpen,
-    setIsOpen,
+  const {
+    accept,
+    clean,
+    setClean,
+    setAccept,
     areYouSure,
     setAreYouSure,
     sendMail,
-    setSendMail
-  }
+    setSendMail,
+  } = useContext(ModalContext);
+  return {
+    accept,
+    setAccept,
+    areYouSure,
+    setAreYouSure,
+    sendMail,
+    setSendMail,
+    clean,
+    setClean,
+  };
 }
-

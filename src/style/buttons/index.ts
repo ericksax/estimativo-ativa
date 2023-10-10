@@ -13,7 +13,7 @@ export const Button = styled.button<ButtonProps>`
   }};
 
   padding: 1rem 2rem;
-  border-radius: 0.8rem;
+  border-radius: 0.4rem;
   background-color: ${({ variant }: ButtonProps) =>
     variant === "primary" ? "var(--color-brand-2)" : "var(--color-warning)"};
   color: white;
@@ -21,5 +21,10 @@ export const Button = styled.button<ButtonProps>`
 
   &:hover {
     filter: brightness(0.8);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.6);
   }
 `;

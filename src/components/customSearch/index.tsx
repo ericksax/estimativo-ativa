@@ -20,6 +20,7 @@ export function CustomSearch({ isLoading }: CustomSearchProps) {
   const [inputQuantity, setInputQuantity] = useState(1);
   const [filteredData, setFilteredData] = useState([] as AtivaProductProps[]);
   const { setAreYouSure } = useModal();
+
   const total = tableList.reduce((acc, act) => acc + Number(act.valor), 0);
 
   useEffect(() => {
@@ -87,22 +88,27 @@ export function CustomSearch({ isLoading }: CustomSearchProps) {
           setSearchTerm={setSearchTerm}
           setInputQuantity={setInputQuantity}
           inputQuantity={inputQuantity}
+          price={product.valor}
           setFilteredData={setFilteredData}
-        />
-        {filteredData.length > 0 && searchTerm != product.descricao_produto ? (
-          <ContainerFilterData
-            filteredData={filteredData}
-            searchTerm={searchTerm}
-            addItemToTable={addItemToTable}
-          />
-        ) : null}
-        <CustomTable setTableList={setTableList} tableList={tableList} />
-        {tableList.length == 0 ? (
-          <EmptyList>
-            <FaFolderOpen size={64} />
-            <p>Lista vazia...</p>
-          </EmptyList>
-        ) : null}
+        >
+          {filteredData.length > 0 &&
+          searchTerm != product.descricao_produto ? (
+            <ContainerFilterData
+              filteredData={filteredData}
+              searchTerm={searchTerm}
+              addItemToTable={addItemToTable}
+            />
+          ) : null}
+        </Form>
+        <div className="table-content">
+          <CustomTable setTableList={setTableList} tableList={tableList} />
+          {tableList.length == 0 ? (
+            <EmptyList>
+              <FaFolderOpen size={64} />
+              <p>Lista vazia...</p>
+            </EmptyList>
+          ) : null}
+        </div>
       </main>
       <Footer setAreYouSure={setAreYouSure} total={total} />
       <ModalCustom setTableList={setTableList} />

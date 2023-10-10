@@ -1,3 +1,6 @@
+import { Button } from "../../style/buttons";
+import { formatToCurrency } from "../../utils/utils";
+import { Input } from "../Input";
 import { FormProps } from "./@types";
 import { FormContainer } from "./style";
 
@@ -8,12 +11,25 @@ export function Form({
   setInputQuantity,
   inputQuantity,
   setFilteredData,
+  price,
+  children,
 }: FormProps) {
+  price = price || 0;
+  const formattedPrice = formatToCurrency(price / 100);
+
+  const subTotal = (price: number) => {
+    if (inputQuantity) {
+      const subtotal = formatToCurrency((price * inputQuantity) / 100);
+      return subtotal;
+    }
+  };
+
   const getApiSearch = async (searchTerm: string) => {
     const termo = {
-      searchTerm: searchTerm,
+      searchTerm: searchTerm.trim(),
     };
-    if (searchTerm.length >= 3) {
+
+    if (termo.searchTerm && termo.searchTerm.length >= 3) {
       try {
         const response = await fetch(import.meta.env.VITE_DATABASE_URL, {
           body: JSON.stringify(termo),
@@ -33,7 +49,6 @@ export function Form({
               Number(partDate[1]) - 1,
               Number(partDate[2])
             );
-
             return vigentDate > actualDate;
           }
         );
@@ -47,23 +62,53 @@ export function Form({
   return (
     <FormContainer>
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
+          className="description"
+          label="Descrição"
           type="text"
           value={searchTerm}
           placeholder="Busque aqui pelo produto que deseja..."
           onChange={(e) => setSearchTerm(e.target.value.toUpperCase())}
-          onKeyUp={() => getApiSearch(searchTerm)}
+          onKeyUp={() => {
+            if (searchTerm === "") {
+              setFilteredData([]);
+            }
+            getApiSearch(searchTerm);
+          }}
           required
         />
-        <input
+
+        <Input
+          label="Preço"
+          type="text"
+          className="price"
+          readOnly
+          value={formattedPrice || 0}
+        />
+
+        <Input
+          label="Quantidade"
           type="number"
           name="quantity"
+          className="price"
+          required
           min={1}
-          onChange={(e) => setInputQuantity(parseInt(e.target.value))}
           value={inputQuantity}
+          onChange={(e) => setInputQuantity(parseInt(e.target.value))}
         />
-        <button>Adicionar</button>
+
+        <Input
+          label="Subtotal"
+          min={0}
+          type="text"
+          className="price"
+          readOnly
+          value={subTotal(price)}
+        />
+
+        <Button variant="primary">Adicionar</Button>
       </form>
+      {children}
     </FormContainer>
   );
 }

@@ -5,7 +5,10 @@ export function TableRow({ deleteProduct, item }: TableRowProps) {
   const unitaryPrice = formatToCurrency(Number(item.valor) / item.quantity);
   const price = formatToCurrency(Number(item.valor));
   const quantity = item.quantity.toLocaleString("pt-BR");
-  const packaging = item.embalagem?.trim() !== "" ? item.embalagem : "--";
+  const packaging =
+    item.embalagem?.trim() !== "" || item.emb_com || item.und
+      ? item.embalagem + " " + item.emb_com + item.und
+      : "--";
 
   return (
     <StyledTr>

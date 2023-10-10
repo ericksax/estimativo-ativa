@@ -1,3 +1,4 @@
+import { formatToCurrency } from "../../utils/utils";
 import { Container } from "./style";
 
 export function ContainerFilterData({
@@ -20,7 +21,15 @@ export function ContainerFilterData({
                   >
                     {item.descricao_produto}
                     <span className="subInfo">
-                      {item.embalagem + " - " + item.fabricante}
+                      {item.embalagem +
+                        " - " +
+                        item.emb_com +
+                        item.und +
+                        " - " +
+                        item.fabricante}
+                    </span>
+                    <span className="price">
+                      {formatToCurrency(item.valor / 100)}
                     </span>
                   </li>
                 )

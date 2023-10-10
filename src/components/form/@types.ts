@@ -1,4 +1,4 @@
-import { FormEvent, SetStateAction } from "react";
+import { FormEvent, ReactNode, SetStateAction } from "react";
 
 export interface FormProps {
   searchTerm: string;
@@ -7,4 +7,6 @@ export interface FormProps {
   setInputQuantity: (quantity: number) => void;
   handleSubmit: (e: FormEvent) => void;
   setFilteredData: React.Dispatch<SetStateAction<AtivaProductProps[]>>;
+  price: number;
+  children: ReactNode;
 }

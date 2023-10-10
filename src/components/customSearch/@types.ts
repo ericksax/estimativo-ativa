@@ -7,4 +7,6 @@ interface AtivaProductProps {
   valor: number;
   quantity: number;
   valid_reg_anvisa: string;
+  emb_com: string;
+  und: string;
 }

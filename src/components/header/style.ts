@@ -9,7 +9,7 @@ export const StyledHeader = styled.header`
   height: 80px;
   position: sticky;
   top: 0;
-
+  z-index: 1;
   div {
     display: flex;
     justify-content: space-between;
