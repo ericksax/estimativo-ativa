@@ -64,7 +64,7 @@ export const FormInfo = () => {
           <section className="info">
             <h1>Olá, Seja bem vindo!</h1>
             <p>
-              Esse é o Ativa orçamentos estimativos, preencha os campos ao lado
+              Este é o Ativa Orçamentos Estimativos. Preencha os campos ao lado
               para ter acesso ao sistema de orçamento.{" "}
             </p>
           </section>
