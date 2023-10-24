@@ -26,7 +26,7 @@ export function Form({
 
   const getApiSearch = async (searchTerm: string) => {
     const termo = {
-      searchTerm: searchTerm.trim(),
+      searchTerm: searchTerm.replace(" ", "%").trim(),
     };
 
     if (termo.searchTerm && termo.searchTerm.length >= 3) {
@@ -39,10 +39,11 @@ export function Form({
           },
         });
         const data = await response.json();
+
         const actualDate = new Date();
 
-        const vigentProducts: AtivaProductProps[] = data.filter(
-          (product: AtivaProductProps) => {
+        const vigentProducts: AtivaProductProps[] = data
+          .filter((product: AtivaProductProps) => {
             const partDate = product?.data_validade.split("-");
             const vigentDate = new Date(
               Number(partDate[0]),
@@ -50,8 +51,13 @@ export function Form({
               Number(partDate[2])
             );
             return vigentDate > actualDate;
-          }
-        );
+          })
+          .map((product: AtivaProductProps) => {
+            return {
+              ...product,
+              valor: product.valor * 0.3,
+            };
+          });
         setFilteredData(vigentProducts);
       } catch (error) {
         console.log(error);

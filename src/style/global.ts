@@ -39,5 +39,4 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 98rem;
     padding: 2rem;
   }
-
 `;
