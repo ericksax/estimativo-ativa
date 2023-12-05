@@ -8,10 +8,11 @@ export interface AtivaProductProps {
 }
 
 export interface ContactProps {
-  name: string;
-  contact: string;
+  orcNumber: number;
+  orgao_nome: string;
+  telefone: string;
   cnpj: string;
   id: number;
   email: string;
-  requester: string;
+  solicitante_nome: string;
 }

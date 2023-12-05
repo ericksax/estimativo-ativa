@@ -1,3 +1,4 @@
+import { api } from "../../servers/api";
 import { Button } from "../../style/buttons";
 import { formatToCurrency } from "../../utils/utils";
 import { Input } from "../Input";
@@ -25,21 +26,25 @@ export function Form({
   };
 
   const getApiSearch = async (searchTerm: string) => {
+    while (searchTerm.indexOf(" ") >= 0) {
+      searchTerm = searchTerm.replace(" ", "%");
+    }
+
     const termo = {
-      searchTerm: searchTerm.replace(" ", "%").trim(),
+      searchTerm,
     };
 
     if (termo.searchTerm && termo.searchTerm.length >= 3) {
       try {
-        const response = await fetch(import.meta.env.VITE_DATABASE_URL, {
-          body: JSON.stringify(termo),
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-        });
-        const data = await response.json();
-
+        const { data } = await api.post(
+          import.meta.env.VITE_DATABASE_URL,
+          JSON.stringify(termo),
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
         const actualDate = new Date();
 
         const vigentProducts: AtivaProductProps[] = data
@@ -58,6 +63,7 @@ export function Form({
               valor: product.valor * 0.3,
             };
           });
+
         setFilteredData(vigentProducts);
       } catch (error) {
         console.log(error);
@@ -75,6 +81,7 @@ export function Form({
           value={searchTerm}
           placeholder="Busque aqui pelo produto que deseja..."
           onChange={(e) => setSearchTerm(e.target.value.toUpperCase())}
+          autoFocus={true}
           onKeyUp={() => {
             if (searchTerm === "") {
               setFilteredData([]);
@@ -112,7 +119,9 @@ export function Form({
           value={subTotal(price)}
         />
 
-        <Button variant="primary">Adicionar</Button>
+        <Button variant="primary" type="submit">
+          Adicionar
+        </Button>
       </form>
       {children}
     </FormContainer>

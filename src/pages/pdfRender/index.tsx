@@ -12,6 +12,11 @@ import { formatQuantity, formatToCurrency } from "../../utils/utils";
 import { AtivaProductProps, ContactProps } from "./@types";
 import Logo from "../../assets/logomarca-ativa-hospitalar-black.png";
 
+// async function getSequancialOrcNumber() {
+//   const result = await fetch("http://localHost:8000/app.php");
+//   const data = await result.json();
+// }
+
 export const PDFRender = () => {
   const [contactInfo, setContactInfo] = useState({} as ContactProps);
   const [list, setList] = useState([] as AtivaProductProps[]);
@@ -34,7 +39,10 @@ export const PDFRender = () => {
 
     if (localStorage.getItem("@EstimativOrc")) {
       const infos = JSON.parse(localStorage.getItem("@EstimativOrc")!);
-      setContactInfo(infos);
+      const orcNumber = JSON.parse(
+        localStorage.getItem("@estimativaOrcNumber")!
+      );
+      setContactInfo({ ...infos, orcNumber: orcNumber });
     }
   }, []);
   return (
@@ -58,15 +66,15 @@ export const PDFRender = () => {
           </View>
           <View>
             <div style={styles.subHeader}>
-              <Text>Número do pedido:{" " + contactInfo.id || 1}</Text>
+              <Text>Número do pedido: {contactInfo.orcNumber}</Text>
               <Text>Data: {date}</Text>
             </div>
             <div style={styles.flex_between}>
               <Text style={styles.subHeader_info}>
-                Cliente: {contactInfo.name}
+                Cliente: {contactInfo.orgao_nome}
               </Text>
               <Text style={styles.subHeader_info}>
-                Solicitante: {contactInfo.requester}
+                Solicitante: {contactInfo.solicitante_nome}
               </Text>
               <Text style={styles.subHeader_info}>
                 e-mail: {contactInfo.email}
@@ -75,7 +83,9 @@ export const PDFRender = () => {
                 CNPJ: {contactInfo.cnpj}
               </Text>
             </div>
-            <Text style={styles.subHeader}>Contato: {contactInfo.contact}</Text>
+            <Text style={styles.subHeader}>
+              Contato: {contactInfo.telefone}
+            </Text>
           </View>
           <View style={styles.section}>
             <View style={styles.table}>

@@ -4,7 +4,7 @@ import { StyledModal } from "../modalDestroy/style";
 import { ModalSendMailContainer } from "./style";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useModal } from "../../hooks/useModal";
-import { api } from "../../servers/api";
+import { api } from "../../servers/mailApi";
 import { toast } from "react-toastify";
 interface ModalSendByMailProps {
   email: string;
@@ -31,33 +31,38 @@ export const ModalSendByMail = () => {
     };
 
     try {
-      api.post("/sendmail", bodyRequest, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      toast.success("Email enviado com sucesso!!!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      api
+        .post("/sendmail", bodyRequest, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            toast.success("Email enviado com sucesso!", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else {
+            toast.error("Ops, algo deu errado, tente mais tarde!", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        });
     } catch (error) {
-      toast.error("Ops, algo deu errado, tente mais tarde!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
       console.log(error);
     }
     setSendMail(false);

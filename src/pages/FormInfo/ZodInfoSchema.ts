@@ -1,11 +1,11 @@
 import z from "zod";
 
 export const zodInfoSchema = z.object({
-  name: z
+  orgao_nome: z
     .string()
     .min(3, "O nome deve possuir no mínimo três caracteres.")
     .nonempty(),
-  requester: z
+  solicitante_nome: z
     .string()
     .min(3, "O nome deve possuir no mínimo três caracteres.")
     .nonempty(),
@@ -18,7 +18,7 @@ export const zodInfoSchema = z.object({
       "CNPJ inválido"
     )
     .nonempty(),
-  contact: z
+  telefone: z
     .string()
     .min(11, "Contato deve ter no mínimo doze caracteres")
     .regex(

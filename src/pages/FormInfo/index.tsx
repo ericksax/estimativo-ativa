@@ -11,14 +11,13 @@ import { ModalConcent } from "../../components/modalConcent";
 import { zodInfoSchema, FormValuesProps } from "./ZodInfoSchema";
 
 interface FormDataProps {
-  name: string;
-  contact: string;
+  orgao_nome: string;
+  telefone: string;
   cnpj: string;
-  requester: string;
+  solicitante_nome: string;
   email: string;
 }
 
-const arrayCount = [];
 export const FormInfo = () => {
   const navigate = useNavigate();
 
@@ -41,20 +40,20 @@ export const FormInfo = () => {
   function submit(formData: FormDataProps) {
     const formatedCNPJ = insertCNPJMask(formData.cnpj);
 
-    const simpleCount = () => {
-      arrayCount.push("item");
-      return arrayCount.length;
-    };
-
     const formatedData = {
       ...formData,
-      id: simpleCount(),
       cnpj: formatedCNPJ,
-      accept: true,
+      aceite: true,
     };
 
     localStorage.setItem("@EstimativOrc", JSON.stringify(formatedData));
-    reset({ cnpj: "", requester: "", name: "", email: "", contact: "" });
+    reset({
+      cnpj: "",
+      orgao_nome: "",
+      solicitante_nome: "",
+      email: "",
+      telefone: "",
+    });
   }
 
   return (
@@ -73,10 +72,10 @@ export const FormInfo = () => {
               <Input
                 label={"Nome da instituição ou órgão público:"}
                 type="text"
-                {...register("name")}
+                {...register("orgao_nome")}
               />
               <ErrorMessage>
-                {errors.name ? errors.name.message : null}
+                {errors.orgao_nome ? errors.orgao_nome.message : null}
               </ErrorMessage>
               <CustomImputMask
                 label={"CNPJ"}
@@ -91,10 +90,12 @@ export const FormInfo = () => {
               <Input
                 label={"Nome do Solicitante"}
                 type="text"
-                {...register("requester")}
+                {...register("solicitante_nome")}
               />
               <ErrorMessage>
-                {errors.requester ? errors.requester.message : null}
+                {errors.solicitante_nome
+                  ? errors.solicitante_nome.message
+                  : null}
               </ErrorMessage>
               <Input label={"Email"} type="email" {...register("email")} />
               <ErrorMessage>
@@ -104,10 +105,10 @@ export const FormInfo = () => {
                 label={"Telefone"}
                 type="text"
                 mask={"(99) 99999-9999"}
-                {...register("contact")}
+                {...register("telefone")}
               />
               <ErrorMessage>
-                {errors.contact ? errors.contact.message : null}
+                {errors.telefone ? errors.telefone.message : null}
               </ErrorMessage>
               <Button
                 variant="primary"
