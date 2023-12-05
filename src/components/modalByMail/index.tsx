@@ -22,12 +22,14 @@ export const ModalSendByMail = () => {
   const submit: SubmitHandler<ModalSendByMailProps> = (formData) => {
     const contact = JSON.parse(localStorage.getItem("@EstimativOrc")!);
     const list = JSON.parse(localStorage.getItem("@AtivaHospLogList")!);
+    const numberOrc = JSON.parse(localStorage.getItem("@estimativaOrcNumber")!);
     const { email } = formData;
 
     const bodyRequest = {
       email,
       contact,
       list,
+      numberOrc,
     };
 
     try {
