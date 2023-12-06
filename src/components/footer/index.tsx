@@ -17,10 +17,12 @@ export const Footer = ({ total }: FooterProps) => {
   async function sendEstimate() {
     const list = JSON.parse(localStorage.getItem("@AtivaHospLogList")!);
     const info = JSON.parse(localStorage.getItem("@EstimativOrc")!);
+
     const objectBody = {
       list,
       info,
     };
+
     const body = JSON.stringify(objectBody);
     try {
       await api

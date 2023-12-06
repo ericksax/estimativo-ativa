@@ -19,7 +19,7 @@ export const ModalSendByMail = () => {
     formState: { errors },
   } = useForm<ModalSendByMailProps>();
 
-  const submit: SubmitHandler<ModalSendByMailProps> = (formData) => {
+  const submit: SubmitHandler<ModalSendByMailProps> = async (formData) => {
     const contact = JSON.parse(localStorage.getItem("@EstimativOrc")!);
     const list = JSON.parse(localStorage.getItem("@AtivaHospLogList")!);
     const numberOrc = JSON.parse(localStorage.getItem("@estimativaOrcNumber")!);
@@ -33,7 +33,7 @@ export const ModalSendByMail = () => {
     };
 
     try {
-      api
+      await api
         .post("/sendmail", bodyRequest, {
           headers: {
             "Content-Type": "application/json",
