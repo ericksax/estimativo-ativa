@@ -20,11 +20,10 @@ export const zodInfoSchema = z.object({
     .nonempty(),
   telefone: z
     .string()
-    .min(11, "Contato deve ter no mínimo doze caracteres")
-    .regex(
-      new RegExp(/^\([1-9]{2}\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/),
-      "Contato Inválido"
-    ),
+    .refine((value) => /^\(\d{2}\) \d{4,5}-\d{4}$/.test(value), {
+      message:
+        "Digite um telefone válido no formato (99) 9999-9999 ou (99) 99999-9999",
+    }),
 });
 
 export type FormValuesProps = z.infer<typeof zodInfoSchema>;

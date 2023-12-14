@@ -33,7 +33,7 @@ export const ModalSendByMail = () => {
     };
 
     try {
-      await api
+      api
         .post("/sendmail", bodyRequest, {
           headers: {
             "Content-Type": "application/json",

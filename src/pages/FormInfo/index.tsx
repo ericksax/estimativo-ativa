@@ -32,10 +32,35 @@ export const FormInfo = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormValuesProps>({
     resolver: zodResolver(zodInfoSchema),
   });
+
+  const formatPhoneNumber = (value: any) => {
+    const numbersOnly = value.replace(/\D/g, "");
+    let formattedValue = "";
+
+    if (numbersOnly.length > 0) {
+      formattedValue = "(" + numbersOnly.substring(0, 2);
+      if (numbersOnly.length > 2) {
+        formattedValue += ") " + numbersOnly.substring(2, numbersOnly.length);
+        if (numbersOnly.length > 6 && numbersOnly.length <= 10) {
+          formattedValue = formattedValue.replace(/(\d{4})(\d{4})/, "$1-$2");
+        } else if (numbersOnly.length > 6) {
+          formattedValue = formattedValue.replace(/(\d{5})(\d{4})/, "$1-$2");
+        }
+      }
+    }
+
+    return formattedValue;
+  };
+
+  const handlePhoneNumberChange = (e: any) => {
+    const formattedValue = formatPhoneNumber(e.target.value);
+    setValue("telefone", formattedValue);
+  };
 
   function submit(formData: FormDataProps) {
     const formatedCNPJ = insertCNPJMask(formData.cnpj);
@@ -101,10 +126,11 @@ export const FormInfo = () => {
               <ErrorMessage>
                 {errors.email ? errors.email.message : null}
               </ErrorMessage>
-              <CustomImputMask
+              <Input
                 label={"Telefone"}
                 type="text"
-                mask={"(99) 99999-9999"}
+                maxLength={15}
+                onInput={handlePhoneNumberChange}
                 {...register("telefone")}
               />
               <ErrorMessage>
