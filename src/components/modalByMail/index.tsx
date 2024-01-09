@@ -41,16 +41,7 @@ export const ModalSendByMail = () => {
         })
         .then((response) => {
           if (response.status === 200) {
-            toast.success("Email enviado com sucesso!", {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
+            console.log("email enviado");
           } else {
             toast.error("Ops, algo deu errado, tente mais tarde!", {
               position: "top-right",

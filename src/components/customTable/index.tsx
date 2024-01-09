@@ -20,7 +20,7 @@ export function CustomTable({ tableList, setTableList }: TableListProps) {
       <thead>
         <tr>
           <th>Item</th>
-          <th>Name</th>
+          <th>Nome</th>
           <th>Apresentação</th>
           <th>Fabricante</th>
           <th>Unitário</th>
