@@ -16,3 +16,29 @@ export const insertCNPJMask = (cnpj: string) => {
   );
   return cnpjFormatted;
 };
+
+export function ordenarPorTermo(
+  items: AtivaProductProps[],
+  termoBusca: string
+): AtivaProductProps[] {
+  // Função auxiliar para verificar se o item começa com o termo de busca
+  const iniciaComTermo = (item: string): boolean => {
+    return item.toLowerCase().startsWith(termoBusca.toLowerCase());
+  };
+
+  // Separar os itens em dois grupos: os que começam e os que não começam com o termo de busca
+  const itensIniciamComTermo = items.filter((item: AtivaProductProps) =>
+    iniciaComTermo(item.descricao_produto)
+  );
+
+  const itensNaoIniciamComTermo = items.filter(
+    (item) => !iniciaComTermo(item.descricao_produto)
+  );
+
+  // Ordenar cada grupo separadamente
+  itensIniciamComTermo.sort();
+  itensNaoIniciamComTermo.sort();
+
+  // Concatenar os dois grupos, mantendo os que iniciam com o termo de busca primeiro
+  return [...itensIniciamComTermo, ...itensNaoIniciamComTermo];
+}

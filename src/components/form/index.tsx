@@ -1,6 +1,6 @@
 import { api } from "../../servers/api";
 import { Button } from "../../style/buttons";
-import { formatToCurrency } from "../../utils/utils";
+import { formatToCurrency, ordenarPorTermo } from "../../utils/utils";
 import { Input } from "../Input";
 import { FormProps } from "./@types";
 import { FormContainer } from "./style";
@@ -26,9 +26,9 @@ export function Form({
   };
 
   const getApiSearch = async (searchTerm: string) => {
-    while (searchTerm.indexOf(" ") >= 0) {
-      searchTerm = searchTerm.replace(" ", "%");
-    }
+    // while (searchTerm.indexOf(" ") >= 0) {
+    //   searchTerm = searchTerm.replace(" ", "%");
+    // }
 
     const termo = {
       searchTerm,
@@ -64,7 +64,25 @@ export function Form({
             };
           });
 
-        setFilteredData(vigentProducts);
+        // .sort((a: AtivaProductProps, b: AtivaProductProps) => {
+        //   if (
+        //     a.descricao_produto.startsWith(searchTerm) &&
+        //     !b.descricao_produto.startsWith(searchTerm)
+        //   ) {
+        //     return -1;
+        //   }
+
+        //   if (
+        //     !a.descricao_produto.startsWith &&
+        //     b.descricao_produto.startsWith(searchTerm)
+        //   ) {
+        //     return 1;
+        //   }
+        //   return 0;
+        // });
+
+        const filteredProducts = ordenarPorTermo(vigentProducts, searchTerm);
+        setFilteredData(filteredProducts);
       } catch (error) {
         console.log(error);
       }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
-  top: 7.6rem;
+  top: 7.4rem;
   display: flex;
   background-color: white;
   max-height: 32rem;
@@ -10,6 +10,7 @@ export const Container = styled.div`
   overflow-y: auto;
   width: 100%;
   max-width: 94rem;
+  z-index: 2;
 
   ul {
     width: 100%;
