@@ -60,7 +60,7 @@ export function Form({
           .map((product: AtivaProductProps) => {
             return {
               ...product,
-              valor: product.valor * 0.3,
+              valor: product.valor * 1,
             };
           });
 

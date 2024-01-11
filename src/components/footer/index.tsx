@@ -47,7 +47,7 @@ export const Footer = ({ total }: FooterProps) => {
       <div className="wrapper">
         <aside>
           <Button variant="primary" onClick={() => setAreYouSure(true)}>
-            Excluir
+            Novo orçamento
           </Button>
           <Link to="/pdf_document" target="_blank">
             <Button variant="primary" onClick={() => sendEstimate()}>
