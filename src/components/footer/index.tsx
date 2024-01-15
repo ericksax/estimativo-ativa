@@ -15,6 +15,7 @@ export const Footer = ({ total }: FooterProps) => {
   const formattedTotal = formatToCurrency(total);
 
   async function sendEstimate() {
+    console.log("oi");
     const list = JSON.parse(localStorage.getItem("@AtivaHospLogList")!);
     const info = JSON.parse(localStorage.getItem("@EstimativOrc")!);
 
@@ -26,7 +27,7 @@ export const Footer = ({ total }: FooterProps) => {
     const body = JSON.stringify(objectBody);
     try {
       await api
-        .post(import.meta.env.VITE_API_ORC, body, {
+        .post("wms_ativa/apiservice/orcamento/gravaOrcamento.php", body, {
           headers: {
             "Content-Type": "application/json",
           },
