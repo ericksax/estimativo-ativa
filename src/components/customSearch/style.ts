@@ -8,6 +8,7 @@ export const Container = styled.div`
   }
 
   .table-content {
+    display: grid;
     width: 100%;
     overflow: auto;
   }
@@ -23,6 +24,7 @@ export const EmptyList = styled.div`
   min-width: 52.4rem;
   max-width: 93.6rem;
   align-self: center;
+  justify-self: center;
   height: 24rem;
   gap: 4rem;
 
