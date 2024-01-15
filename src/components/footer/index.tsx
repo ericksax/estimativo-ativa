@@ -15,7 +15,6 @@ export const Footer = ({ total }: FooterProps) => {
   const formattedTotal = formatToCurrency(total);
 
   async function sendEstimate() {
-    console.log("oi");
     const list = JSON.parse(localStorage.getItem("@AtivaHospLogList")!);
     const info = JSON.parse(localStorage.getItem("@EstimativOrc")!);
 
