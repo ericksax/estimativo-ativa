@@ -27,7 +27,7 @@ export const Footer = ({ total }: FooterProps) => {
     const body = JSON.stringify(objectBody);
     try {
       await api
-        .post("wms_ativa/apiservice/orcamento/gravaOrcamento.php", body, {
+        .post("/wms_ativa/apiservice/orcamento/gravaOrcamento.php", body, {
           headers: {
             "Content-Type": "application/json",
           },
