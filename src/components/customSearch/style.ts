@@ -8,11 +8,8 @@ export const Container = styled.div`
   }
 
   .table-content {
+    width: 100%;
     overflow: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 `;
 export const EmptyList = styled.div`

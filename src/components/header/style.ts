@@ -16,6 +16,16 @@ export const StyledHeader = styled.header`
     align-items: center;
     margin: 0 auto;
     width: 100%;
-    max-width: 98rem;
+    max-width: 95.6rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 400;
+    }
   }
 `;
