@@ -59,6 +59,7 @@ export function CustomSearch({ isLoading }: CustomSearchProps) {
     );
 
     const formattedPrice = product.valor / 100;
+
     if (hasOnTableList) {
       const price = formattedPrice;
       hasOnTableList.quantity = hasOnTableList.quantity + inputQuantity;
@@ -69,11 +70,26 @@ export function CustomSearch({ isLoading }: CustomSearchProps) {
     if (Object.keys(product).length != 0) {
       const formattedPriceQuantity = formattedPrice * inputQuantity;
 
-      const insertedProduct = {
-        ...product,
+      function changeNullValues(product: any) {
+        const objetoModificado: any = {};
+          Object.keys(product).forEach(chave => {
+            objetoModificado[chave] = product[chave] === null ? "--" : product[chave];
+          });
+        return objetoModificado;
+      }
+
+      const productWithoutNullValue = changeNullValues(product)
+
+      console.log(product)
+
+      const insertedProduct = { 
+        ...productWithoutNullValue, 
         valor: formattedPriceQuantity,
         quantity: inputQuantity,
       };
+
+
+
       setTableList((state) => [...state, insertedProduct]);
     }
     setProduct({} as AtivaProductProps);
