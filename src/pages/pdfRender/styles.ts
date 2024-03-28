@@ -47,10 +47,11 @@ export const styles = StyleSheet.create({
 
   header: {
     borderTop: "none",
-    fontSize: "6px",
-    backgroundColor: "#c4c4c4",
+    fontSize: "8px",
+    backgroundColor: "silver",
     paddingHorizontal: 4,
     marginBottom: 1,
+    
   },
 
   subHeader: {
