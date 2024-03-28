@@ -5,6 +5,8 @@ export interface AtivaProductProps {
   embalagem: string;
   valor: number;
   quantity: number;
+  emb_com: string;
+  und: string;
 }
 
 export interface ContactProps {
