@@ -1,7 +1,16 @@
+
 import { formatToCurrency } from "../../utils/utils";
 import { CustomFaTrash, StyledTr } from "./style";
 
-export function TableRow({ deleteProduct, item }: TableRowProps) {
+export function TableRow({ deleteProduct, item}: TableRowProps) {
+  function findNullableValue(item:any) {
+    const objetoModificado: any = {};
+      Object.keys(item).forEach(chave => {
+        objetoModificado[chave] = item[chave] === null ? "" : item[chave];
+  });
+  return objetoModificado;
+  }
+  item = findNullableValue(item)
   const unitaryPrice = formatToCurrency(Number(item.valor) / item.quantity);
   const price = formatToCurrency(Number(item.valor));
   const quantity = item.quantity.toLocaleString("pt-BR");
