@@ -106,10 +106,10 @@ export const PDFRender = () => {
                     <Text style={styles.row1}>{item.descricao_produto}</Text>
                     <Text style={styles.row2}>
                       {" "}
-                      {item.embalagem.substring(0, 30) + "..."}
+                      {item.embalagem + " " + item.emb_com + item.und == "-- ----" ? "Não informada" : item.embalagem + " " + item.emb_com + item.und}
                     </Text>
                     <Text style={styles.row3}>
-                      {item.fabricante.substring(0, 20) + "..."}
+                      {item.fabricante}
                     </Text>
                     <Text style={styles.row4}>{quantity}</Text>
                     <Text style={styles.row5}>{price}</Text>

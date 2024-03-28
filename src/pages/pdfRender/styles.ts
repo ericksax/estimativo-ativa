@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     borderTop: "1px solid #000",
     paddingTop: 4,
     paddingBottom: 4,
-    height: "16px",
+    height: "24px",
     fontSize: 6,
     paddingHorizontal: 4,
   },
@@ -98,26 +98,43 @@ export const styles = StyleSheet.create({
   },
 
   row1: {
-    width: "25%",
+    width: "35%",
+    height: "16px",
+    borderLeft: "0.5px solid #000",
+    paddingLeft: "2px",
+    paddingRight: "2px",
   },
 
   row2: {
-    width: "30%",
+    width: "20%",
+    borderLeft: "0.5px solid #000",
+    paddingLeft: "2px",
+    paddingRight: "2px", 
+    textAlign: "center",
   },
 
   row3: {
     width: "15%",
+    borderLeft: "0.5px solid #000",
+    paddingLeft: "2px",
+    paddingRight: "2px" 
   },
 
   row4: {
     display: "flex",
     width: "10%",
     textAlign: "center",
+    borderLeft: "0.5px solid #000",
+    paddingLeft: "2px",
+    paddingRight: "2px" 
   },
 
   row5: {
     width: "10%",
     textAlign: "right",
+    borderLeft: "0.5px solid #000",
+    paddingLeft: "2px",
+    paddingRight: "2px" 
   },
 
   total: {
